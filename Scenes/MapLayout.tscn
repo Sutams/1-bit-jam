@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmh342llkdxrc"]
+
+[ext_resource type="Script" uid="uid://jd10sjrwyybe" path="res://Scripts/MapLayout.gd" id="1_ymxfh"]
+[ext_resource type="Texture2D" uid="uid://by551mw355myo" path="res://Sprites/block.png" id="2_1oxs1"]
+[ext_resource type="Texture2D" uid="uid://th28v35ml2hj" path="res://Sprites/block_outline.png" id="3_1oxs1"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1oxs1"]
+
+[node name="MapLayout" type="StaticBody2D"]
+scale = Vector2(5.9492197, 4.7060466)
+script = ExtResource("1_ymxfh")
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("2_1oxs1")
+
+[node name="Line2D" type="Line2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+width = 5.4
+texture = ExtResource("3_1oxs1")
+texture_mode = 1
+joint_mode = 2
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_1oxs1")

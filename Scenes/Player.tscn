@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=4 uid="uid://kn4aqaxe1gt"]
+
+[ext_resource type="Script" uid="uid://0dvcc0h6oka7" path="res://Scripts/Player.gd" id="1_rpqav"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_qbkls"]
+_data = PackedByteArray("AAADAAUAAAABAAAAMAAAADAAAADAAAAAUklGRrgAAABXRUJQVlA4TKsAAAAvL8ALEBcw//M///MfgAdXsW07zYH0/CPiPRVISG8CaCqQkJ4I6Fcm73JoBiL6r7Bt28bpbtlD0KBmHnO/KXNiicvlRtwxi6jba8cHflzJ8Bwylxnt1DfSggv/BxIkU0fTg05d9zPMrYKS66RmHnO/KXNiicvlRtwxi6jba8cHflzJ8Bwylxnt1DdS133EKzmAu2QK5ixJaH9+kVRl8vKK/AeOByvnVh7qFwAA")
+size_override = Vector2(48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpqav"]
+atlas = SubResource("PortableCompressedTexture2D_qbkls")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyqiw"]
+atlas = SubResource("PortableCompressedTexture2D_qbkls")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gntrk"]
+atlas = SubResource("PortableCompressedTexture2D_qbkls")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dewec"]
+atlas = SubResource("PortableCompressedTexture2D_qbkls")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ixxa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpqav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyqiw")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gntrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dewec")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_feb5d"]
+radius = 5.0
+height = 20.0
+
+[sub_resource type="Gradient" id="Gradient_rpqav"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kyqiw"]
+gradient = SubResource("Gradient_rpqav")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gntrk"]
+polygon = PackedVector2Array(-81, -33, 3, -3, 3, 2, -80, 32, 8, 5, 8, -7)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_rpqav")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_5ixxa")
+animation = &"Idle"
+frame_progress = 0.55759174
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": false,
+"layer_section": false,
+"output_section": false,
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"scale": "1.0",
+"should_round_fps": true,
+"slice": "",
+"source": "res://Sprites/Player.aseprite",
+"source_uid": -1
+}
+metadata/_aseprite_wizard_source_file_hash_ = "91212965057f9698f0bda9536e1da083"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.9254046, 0.9748109)
+shape = SubResource("CapsuleShape2D_feb5d")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_kyqiw")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(0, -5)
+occluder = SubResource("OccluderPolygon2D_gntrk")
