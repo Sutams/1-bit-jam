@@ -67,36 +67,34 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 
 func _on_clam_timer_timeout() -> void:
-	if clam_open:
-		$Clam/CollisionShape2D.set_deferred("disabled", false)
-		$Clam/AnimatedSprite2D.play("Close")
-		if $Clam/GemArea:
+	if $Clam/GemArea:
+		if clam_open:
+			$Clam/CollisionShape2D.set_deferred("disabled", false)
+			$Clam/AnimatedSprite2D.play("Close")
 			$Clam/GemArea/Sprite2D.visible = false
 			$Clam/GemArea/PointLight2D.enabled = false
 			$Clam/GemArea/PointLight2D2.enabled = false
-	else: #Open clam
-		$Clam/CollisionShape2D.set_deferred("disabled", true)
-		$Clam/AnimatedSprite2D.play("Open")
-		if $Clam/GemArea:
+		else: #Open clam
+			$Clam/CollisionShape2D.set_deferred("disabled", true)
+			$Clam/AnimatedSprite2D.play("Open")
 			$Clam/GemArea/Sprite2D.visible = true
 			$Clam/GemArea/PointLight2D.enabled = true
 			$Clam/GemArea/PointLight2D2.enabled = true
-	clam_open = !clam_open
+		clam_open = !clam_open
 
 
 func _on_chest_timer_timeout() -> void:
-	if chest_open:
-		$Chest/CollisionShape2D.set_deferred("disabled", false)
-		$Chest/AnimatedSprite2D.play("Close")
-		if $Chest/GemArea:
+	if $Chest/GemArea:
+		if chest_open:
+			$Chest/CollisionShape2D.set_deferred("disabled", false)
+			$Chest/AnimatedSprite2D.play("Close")
 			$Chest/GemArea/Sprite2D.visible = false
 			$Chest/GemArea/PointLight2D.enabled = false
 			$Chest/GemArea/PointLight2D2.enabled = false
-	else: #Open chest
-		$Chest/CollisionShape2D.set_deferred("disabled", true)
-		$Chest/AnimatedSprite2D.play("Open")
-		if $Chest/GemArea:
+		else: #Open chest
+			$Chest/CollisionShape2D.set_deferred("disabled", true)
+			$Chest/AnimatedSprite2D.play("Open")
 			$Chest/GemArea/Sprite2D.visible = true
 			$Chest/GemArea/PointLight2D.enabled = true
 			$Chest/GemArea/PointLight2D2.enabled = true
-	chest_open = !chest_open
+		chest_open = !chest_open

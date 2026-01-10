@@ -8,12 +8,19 @@ var weights = 2.3
 var health = 3
 var took_damage = false
 var rotation_speed = 30
+var score = 0
 
 @onready var vision_sprite = $VisionSprite
 
 func _ready() -> void:
 	$AnimatedSprite2D.flip_h = false
 	$PointLight2D.rotation_degrees = 180
+
+func add_score():
+	score +=1
+	print(score)
+	if score >= 6:
+		print("Win")
 
 func damage():
 	health -=1

@@ -19,7 +19,6 @@ debug_color = Color(0.97680324, 0, 0.41267663, 0.41960785)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(0.2648305, 0.24894068)
-energy = 3.0
 shadow_enabled = true
 texture = ExtResource("2_ofw85")
 texture_scale = 2.95
@@ -27,6 +26,7 @@ texture_scale = 2.95
 [node name="PointLight2D2" type="PointLight2D" parent="."]
 scale = Vector2(0.0703125, 0.0625)
 texture = ExtResource("2_nn7u4")
+texture_scale = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
