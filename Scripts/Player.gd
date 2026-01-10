@@ -1,25 +1,33 @@
 extends CharacterBody2D
 
-const speed = 75.0
-const deacc = 2
-const init_light_deg = 180
-var light_deg = init_light_deg
+# Movement
+const SPEED = 75.0
+const HALT = 2
 var weights = 2.3
 
-@onready var hearts_parent = $CanvasLayer/HBoxContainer
+# Lights
+var rotation_speed = 30
+
+# HP
+@export var heart_scene: PackedScene
+@onready var hearts_container = $HealthUI/HeartsContainer
 var hearts_list : Array[Node]
-var health = 3
+var HP = 3
 var took_damage = false
 
-var rotation_speed = 30
+# Scoring system, but now that i think about it its weird that 
+# its here in the player script instead of the game one
 var score = 0
 
 
 func _ready() -> void:
-	$AnimatedSprite2D.flip_h = false
-	$PointLight2D.rotation_degrees = 180
-	
-	hearts_list = hearts_parent.get_children()
+	if !heart_scene:
+		return
+	# Add hearts
+	for i in range(HP):
+		var new_heart = heart_scene.instantiate()
+		hearts_container.add_child(new_heart)
+		hearts_list.append(new_heart)
 
 func add_score():
 	score +=1
@@ -28,19 +36,20 @@ func add_score():
 		print("Win")
 
 func take_damage():
-	health -=1
+	HP -=1
 	for i in range(hearts_list.size()):
 		var heart_sprite = hearts_list[i].get_node("HeartSprite")
-		if i < health:
+		if i < HP:
 			heart_sprite.play("Full")
-		if i == health:
+		if i == HP:
 			heart_sprite.play("Damage")
 	await get_tree().create_timer(1.5).timeout
-	if health > 0:
+	if HP > 0:
 		took_damage = false
 		return
 	print("Game over")
 	get_tree().call_deferred("reload_current_scene")
+
 
 func _physics_process(delta: float) -> void:
 	for i in get_slide_collision_count():
@@ -49,7 +58,6 @@ func _physics_process(delta: float) -> void:
 			if !took_damage:
 				took_damage = !took_damage
 				take_damage()
-
 	
 	if Input.is_action_just_pressed("drop"):
 		if weights > 1:
@@ -59,21 +67,18 @@ func _physics_process(delta: float) -> void:
 		if weights < 3:
 			weights += 1
 	
-	
 	var move_x := Input.get_axis("left", "right")
 	if move_x:
-		velocity.x = move_x * speed
+		velocity.x = move_x * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, deacc)
+		velocity.x = move_toward(velocity.x, 0, HALT)
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var move_y := Input.get_axis("up", "down")
 	if move_y:
-		velocity.y = move_y * speed
-		light_deg = move_toward(light_deg, 90, 30)
-		#light_deg = move_toward(light_deg, light_deg+move_y, 1)
+		velocity.y = move_y * SPEED
 	else:
-		velocity.y = move_toward(velocity.y, 0, deacc)
+		velocity.y = move_toward(velocity.y, 0, HALT)
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -94,16 +99,7 @@ func _physics_process(delta: float) -> void:
 			target_angle = 0
 		else:
 			target_angle = PI
-			
+	
 	$PointLight2D.rotation = lerp_angle($PointLight2D.rotation, target_angle, delta * rotation_speed)
 	
-	#$PointLight2D.rotation_degrees = light_deg
 	move_and_slide()
-	#queue_redraw()
-
-#func _draw():
-	
-	#var facing = Vector2.RIGHT.rotated(rotation)
-	#draw_line(Vector2.ZERO, velocity*10, Color.AQUA, 3.0)
-	
-	#draw_circle(,10,Color.BLUE,)

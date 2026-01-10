@@ -76,7 +76,10 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="HeartSprite" type="AnimatedSprite2D"]
+[node name="Heart" type="TextureRect"]
+custom_minimum_size = Vector2(11.432, 0)
+
+[node name="HeartSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_lmwet")
 animation = &"Full"
