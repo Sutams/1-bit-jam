@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://kn4aqaxe1gt"]
+[gd_scene load_steps=12 format=4 uid="uid://kn4aqaxe1gt"]
 
 [ext_resource type="Script" uid="uid://0dvcc0h6oka7" path="res://Scripts/Player.gd" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://ectq3jjhatot" path="res://Sprites/light_cone_sharp.png" id="2_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://dqmy3c0g3ic13" path="res://Sprites/light.png" id="3_gntrk"]
+[ext_resource type="PackedScene" uid="uid://bxmg667opvgqe" path="res://Scenes/Heart.tscn" id="4_dewec"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_qbkls"]
 _data = PackedByteArray("AAADAAUAAAABAAAAMAAAADAAAADAAAAAUklGRrgAAABXRUJQVlA4TKsAAAAvL8ALEBcw//M///MfgAdXsW07zYH0/CPiPRVISG8CaCqQkJ4I6Fcm73JoBiL6r7Bt28bpbtlD0KBmHnO/KXNiicvlRtwxi6jba8cHflzJ8Bwylxnt1DfSggv/BxIkU0fTg05d9zPMrYKS66RmHnO/KXNiicvlRtwxi6jba8cHflzJ8Bwylxnt1DdS133EKzmAu2QK5ixJaH9+kVRl8vKK/AeOByvnVh7qFwAA")
@@ -101,3 +102,30 @@ position = Vector2(0, -4)
 scale = Vector2(0.15, 0.15)
 color = Color(0.38549262, 0.38549244, 0.38549247, 1)
 texture = ExtResource("3_gntrk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 1.0
+offset_right = 42.0
+offset_bottom = 40.0
+
+[node name="Heart" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(11.432, 0)
+layout_mode = 2
+
+[node name="HeartSprite" parent="CanvasLayer/HBoxContainer/Heart" instance=ExtResource("4_dewec")]
+
+[node name="Heart2" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(11.432, 0)
+layout_mode = 2
+
+[node name="HeartSprite" parent="CanvasLayer/HBoxContainer/Heart2" instance=ExtResource("4_dewec")]
+
+[node name="Heart3" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(11.432, 0)
+layout_mode = 2
+
+[node name="HeartSprite" parent="CanvasLayer/HBoxContainer/Heart3" instance=ExtResource("4_dewec")]
+animation = &"Damage"
+frame_progress = 0.0

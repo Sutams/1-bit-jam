@@ -5,8 +5,12 @@ const deacc = 2
 const init_light_deg = 180
 var light_deg = init_light_deg
 var weights = 2.3
+
+@onready var hearts_parent = $CanvasLayer/HBoxContainer
+var hearts_list : Array[Node]
 var health = 3
 var took_damage = false
+
 var rotation_speed = 30
 var score = 0
 
@@ -14,6 +18,8 @@ var score = 0
 func _ready() -> void:
 	$AnimatedSprite2D.flip_h = false
 	$PointLight2D.rotation_degrees = 180
+	
+	hearts_list = hearts_parent.get_children()
 
 func add_score():
 	score +=1
@@ -21,11 +27,16 @@ func add_score():
 	if score >= 6:
 		print("Win")
 
-func damage():
+func take_damage():
 	health -=1
-	print("-1hp")
+	for i in range(hearts_list.size()):
+		var heart_sprite = hearts_list[i].get_node("HeartSprite")
+		if i < health:
+			heart_sprite.play("Full")
+		if i == health:
+			heart_sprite.play("Damage")
+	await get_tree().create_timer(1.5).timeout
 	if health > 0:
-		await get_tree().create_timer(1.5).timeout
 		took_damage = false
 		return
 	print("Game over")
@@ -37,7 +48,7 @@ func _physics_process(delta: float) -> void:
 		if coll.get_collider().name == "Spikes":
 			if !took_damage:
 				took_damage = !took_damage
-				damage()
+				take_damage()
 
 	
 	if Input.is_action_just_pressed("drop"):

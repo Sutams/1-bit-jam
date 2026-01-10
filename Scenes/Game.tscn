@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://d3lpre6jal08n"]
+[gd_scene load_steps=51 format=4 uid="uid://d3lpre6jal08n"]
 
 [ext_resource type="Script" uid="uid://bpgd0rvow4iop" path="res://Scripts/Game.gd" id="1_j5yw3"]
 [ext_resource type="PackedScene" uid="uid://kn4aqaxe1gt" path="res://Scenes/Player.tscn" id="2_3cx6b"]
@@ -13,6 +13,85 @@
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="11_3cx6b"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="12_wxwew"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="13_acvyw"]
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_3cx6b"]
+_data = PackedByteArray("AAADAAUAAAABAAAAMAAAACAAAAD4AAAAUklGRvAAAABXRUJQVlA4TOMAAAAvL8AHEB8gEEiiXn8NAUHRavcJCIpWu2/+A/BXgZta297kTULvvUn49+y/BMr/0UcmJiREQiTQy6ciJvCBhvwf3UBE/xW2bdvY6SLQR/B5k30gtxWue0cnUFfXeri+pba8zW3VNne8ce/KW2V9xXGU3I82zCIhc8yc2/I1p5mdgFl8w20NMEs/9oCrkh6mgG1OunaAwBX+hzp96eUHdNI41iN/6fWb/aT1zX1SNNRvGtLNJZFvmnGS/aeIXaRPJtmnmImKumkc6xGRhyYBSQImd6DRkL70gX5C+qYIaEiPPHxcAAA=")
+size_override = Vector2(48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxwew"]
+atlas = SubResource("PortableCompressedTexture2D_3cx6b")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acvyw"]
+atlas = SubResource("PortableCompressedTexture2D_3cx6b")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alh3a"]
+atlas = SubResource("PortableCompressedTexture2D_3cx6b")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4q8tf"]
+atlas = SubResource("PortableCompressedTexture2D_3cx6b")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3xnh"]
+atlas = SubResource("PortableCompressedTexture2D_3cx6b")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r6kd"]
+atlas = SubResource("PortableCompressedTexture2D_3cx6b")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tfod6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxwew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxwew")
+}],
+"loop": true,
+"name": &"Broken",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acvyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_alh3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4q8tf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3xnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r6kd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxwew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxwew")
+}],
+"loop": true,
+"name": &"Damage",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acvyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acvyw")
+}],
+"loop": true,
+"name": &"Full",
+"speed": 10.0
+}]
 
 [sub_resource type="Resource" id="Resource_wxwew"]
 script = ExtResource("13_acvyw")
@@ -175,6 +254,17 @@ script = ExtResource("1_j5yw3")
 
 [node name="Player" parent="." instance=ExtResource("2_3cx6b")]
 position = Vector2(138, 126)
+
+[node name="HBoxContainer" parent="Player/CanvasLayer" index="0"]
+offset_left = 23.0
+offset_top = 30.0
+offset_right = 64.0
+offset_bottom = 70.0
+
+[node name="HeartSprite" parent="Player/CanvasLayer/HBoxContainer/Heart" index="0"]
+sprite_frames = SubResource("SpriteFrames_tfod6")
+animation = &"Damage"
+frame_progress = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
