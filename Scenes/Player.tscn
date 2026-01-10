@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://kn4aqaxe1gt"]
+[gd_scene load_steps=11 format=4 uid="uid://kn4aqaxe1gt"]
 
 [ext_resource type="Script" uid="uid://0dvcc0h6oka7" path="res://Scripts/Player.gd" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://ectq3jjhatot" path="res://Sprites/light_cone_sharp.png" id="2_kyqiw"]
+[ext_resource type="Texture2D" uid="uid://dqmy3c0g3ic13" path="res://Sprites/light.png" id="3_gntrk"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_qbkls"]
 _data = PackedByteArray("AAADAAUAAAABAAAAMAAAADAAAADAAAAAUklGRrgAAABXRUJQVlA4TKsAAAAvL8ALEBcw//M///MfgAdXsW07zYH0/CPiPRVISG8CaCqQkJ4I6Fcm73JoBiL6r7Bt28bpbtlD0KBmHnO/KXNiicvlRtwxi6jba8cHflzJ8Bwylxnt1DfSggv/BxIkU0fTg05d9zPMrYKS66RmHnO/KXNiicvlRtwxi6jba8cHflzJ8Bwylxnt1DdS133EKzmAu2QK5ixJaH9+kVRl8vKK/AeOByvnVh7qFwAA")
@@ -87,8 +88,16 @@ scale = Vector2(0.9254046, 0.9748109)
 shape = SubResource("CapsuleShape2D_feb5d")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
 position = Vector2(0, -5)
-scale = Vector2(1.6964285, 0.8705358)
+scale = Vector2(0.71, 0.71)
+color = Color(0.6872149, 0.68721503, 0.6872149, 1)
 shadow_enabled = true
 texture = ExtResource("2_kyqiw")
-texture_scale = 0.35
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(0.15, 0.15)
+color = Color(0.38549262, 0.38549244, 0.38549247, 1)
+texture = ExtResource("3_gntrk")

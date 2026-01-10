@@ -1,6 +1,6 @@
 extends Node
 
-var rect
+var map_bounds
 var clam_open = true
 var chest_open = true
 
@@ -8,16 +8,15 @@ var chest_open = true
 @onready var map = $NavigationRegion2D
 @onready var player = $Player
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	rect = map.get_bounds()
+	map_bounds = map.get_bounds()
 
 
 func fish_path(body: Node2D) -> void:
 	if body.name == "Fish":
-		$Goal.global_position = Vector2(randf_range(rect.position.x,rect.end.x),
-										randf_range(rect.position.y,rect.end.y))
+		$Goal.global_position = Vector2(randf_range(map_bounds.position.x,map_bounds.end.x),
+										randf_range(map_bounds.position.y,map_bounds.end.y))
 		body.make_path()
 
 
