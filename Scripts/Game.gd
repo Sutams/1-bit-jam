@@ -5,43 +5,14 @@ var clam_open = true
 var chest_open = true
 
 # Do this for the other variables!
-@onready var fog_sprite = $FogSprite
 @onready var map = $NavigationRegion2D
 @onready var player = $Player
-var fog_image : Image
-var vision_image : Image
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	rect = $NavigationRegion2D.get_bounds()
-	#generate_fog()
-#
-#
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _physics_process(_delta: float) -> void:
-	##if player.velocity.length():
-		##update_fog()
-	#pass
-#
-#
-#func generate_fog()-> void:
-	##var fog_size = 16
-	#var map_size_x = (rect.end.x-rect.position.x)*16
-	#var map_size_y = (rect.end.y-rect.position.y)*16
-	#
-	#fog_image = Image.create(map_size_x, map_size_y, false, Image.Format.FORMAT_RGBAH)
-	#fog_image.fill(Color.DIM_GRAY)
-	#
-	#fog_sprite.texture = ImageTexture.create_from_image(fog_image)
-	#
-	#vision_image = player.vision_sprite.texture.get_image()
-	#vision_image.convert(Image.Format.FORMAT_RGBAH)
-#
-#func update_fog()-> void:
-	#var vision_rect = Rect2(Vector2.ZERO, vision_image.get_size())
-	#fog_image.blend_rect(fog_image,vision_rect, player.global_position)
-	#var fog_texture = ImageTexture.create_from_image(fog_image)
-	#fog_sprite.texture = fog_texture
+	rect = map.get_bounds()
+
 
 func fish_path(body: Node2D) -> void:
 	if body.name == "Fish":

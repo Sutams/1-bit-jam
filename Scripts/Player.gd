@@ -10,7 +10,6 @@ var took_damage = false
 var rotation_speed = 30
 var score = 0
 
-@onready var vision_sprite = $VisionSprite
 
 func _ready() -> void:
 	$AnimatedSprite2D.flip_h = false

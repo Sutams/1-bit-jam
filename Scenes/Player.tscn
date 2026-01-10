@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://kn4aqaxe1gt"]
+[gd_scene load_steps=10 format=4 uid="uid://kn4aqaxe1gt"]
 
 [ext_resource type="Script" uid="uid://0dvcc0h6oka7" path="res://Scripts/Player.gd" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://ectq3jjhatot" path="res://Sprites/light_cone_sharp.png" id="2_kyqiw"]
@@ -52,15 +52,6 @@ animations = [{
 radius = 5.0
 height = 20.0
 
-[sub_resource type="Gradient" id="Gradient_kyqiw"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gntrk"]
-gradient = SubResource("Gradient_kyqiw")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.92523366, 0.23364486)
-
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_rpqav")
 metadata/_edit_group_ = true
@@ -101,7 +92,3 @@ scale = Vector2(1.6964285, 0.8705358)
 shadow_enabled = true
 texture = ExtResource("2_kyqiw")
 texture_scale = 0.35
-
-[node name="VisionSprite" type="Sprite2D" parent="."]
-visible = false
-texture = SubResource("GradientTexture2D_gntrk")

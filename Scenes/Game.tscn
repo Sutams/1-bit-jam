@@ -514,11 +514,6 @@ scale = Vector2(0.282, 0.265)
 [node name="GemArea4" parent="." instance=ExtResource("8_bf53h")]
 position = Vector2(795, 909)
 
-[node name="FogSprite" type="Sprite2D" parent="."]
-visible = false
-z_index = 10
-centered = false
-
 [connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]
