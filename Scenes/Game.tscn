@@ -1,243 +1,560 @@
-[gd_scene load_steps=18 format=3 uid="uid://d3lpre6jal08n"]
+[gd_scene load_steps=37 format=4 uid="uid://d3lpre6jal08n"]
 
 [ext_resource type="Script" uid="uid://bpgd0rvow4iop" path="res://Scripts/Game.gd" id="1_j5yw3"]
 [ext_resource type="PackedScene" uid="uid://cmh342llkdxrc" path="res://Scenes/MapLayout.tscn" id="2_j5yw3"]
 [ext_resource type="PackedScene" uid="uid://kn4aqaxe1gt" path="res://Scenes/Player.tscn" id="2_xkndl"]
+[ext_resource type="Texture2D" uid="uid://h6qyyhgedr01" path="res://Sprites/Fish.png" id="4_fgofq"]
 [ext_resource type="Texture2D" uid="uid://b2jho2bvbpca" path="res://Sprites/block_outline1.png" id="4_kldst"]
+[ext_resource type="PackedScene" uid="uid://1063cnro2t4i" path="res://Scenes/Fish.tscn" id="5_b2bpf"]
+[ext_resource type="Texture2D" uid="uid://dqmy3c0g3ic13" path="res://Sprites/light.png" id="8_2irst"]
+[ext_resource type="PackedScene" uid="uid://pcgjifjgqd6d" path="res://Scenes/GemArea.tscn" id="8_bf53h"]
+[ext_resource type="Texture2D" uid="uid://dn230n0611h3a" path="res://Sprites/spike.png" id="9_bf53h"]
 
 [sub_resource type="Gradient" id="Gradient_kldst"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.9266667, 0.94666666, 0.96666664, 0.99333334, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.4118619, 0.4118619, 0.4118619, 1, 0.37891477, 0.37891477, 0.37891477, 1, 0.6628845, 0.6628845, 0.6628845, 1, 0.7643521, 0.7643521, 0.7643521, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_fc0e3"]
 gradient = SubResource("Gradient_kldst")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kldst"]
-polygon = PackedVector2Array(92.61719, 108.58371, 85.22126, 111.771095, 68.74851, 111.771095, 58.831245, 108.58371, 60.00787, 104.54635, 69.08469, 108.15872, 84.71699, 108.15872, 91.104385, 105.60881)
+[sub_resource type="CircleShape2D" id="CircleShape2D_fgofq"]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_b2bpf"]
-polygon = PackedVector2Array(8.928265, 7.089037, 12.714301, 6.772965, 12.742555, 7.6308737, 9.18255, 7.72118, 7.7415967, 9.527304, 3.3057182, 9.572457, 3.2774644, 12.95894, 2.8819082, 12.95894, 2.8536541, 9.527304, 1.6669861, 9.572457, 1.6387322, 8.669395, 7.5720725, 8.804854)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7lihs"]
-polygon = PackedVector2Array(63.524857, 48.43065, 69.40798, 50.555576, 82.855125, 50.555576, 88.73825, 46.943203, 90.08296, 49.9181, 84.031746, 53.317978, 69.74416, 53.317978, 62.68441, 50.555576)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fgofq"]
-polygon = PackedVector2Array(78.02032, 35.698753, 77.85223, 32.08638, 99.19956, 32.08638, 100.3493, 45.048424, 123.377525, 45.048424, 123.209435, 48.87329, 100.51739, 49.085785, 101.18974, 57.1605, 98.836494, 57.1605, 96.00587, 35.698753)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2irst"]
-polygon = PackedVector2Array(104.28665, 32.19052, 102.10149, 18.803492, 105.391975, 18.699347, 106.400505, 28.474005, 133.79906, 27.624035, 135.31186, 60.34789, 132.28625, 61.19786, 130.60536, 32.08638)
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7lihs"]
+vertices = PackedVector2Array(457.27344, 174.04688, 459.45313, 173, 566.9297, 173, 529.9375, 214.36719, 491.77344, 232.90625, 413.6328, 232.90625, 777.3203, 548.10156, 749.03125, 552.5469, 782.78906, 545.0625, 511.64844, 631.0078, 529.2969, 757.3203, 427.53125, 763.3125, 392.02344, 717, 387.15625, 691.0703, 301.03125, 380.03125, 326.04688, 341.9922, 381.2578, 440.9297, 351.84375, 467.32813, 686.35156, 627.22656, 827.97656, 634.72656, 790.03906, 654.34375, 708.8125, 648.7031, 217.39063, 888.46094, 297.96094, 943.96094, 41.898438, 942.03125, 117.890625, 889.5703, 739.28906, 207, 772.34375, 156.00781, 782.4297, 294.14063, 737.72656, 234.96875, 583.7578, 274, 543.0078, 237.22656, 674.71094, 715.8828, 705.21094, 670.3281, 296.96094, 795.78906, 216.92969, 849.02344, 728.1719, 714.84375, 754.8281, 676.39844, 717.28125, 736.6172, 751.1719, 778.0781, 697.1172, 779.1094, 836.09375, 69.96875, 840.8906, 307.9297, 810.2422, 287.96094, 800.71875, 125.09375, 113.28125, 850.1328, 38.101563, 756.8672, 81.14844, 782.3281, 37.960938, 341.0078, 90.703125, 378.96875, 37.039063, 460, 92.28906, 406.07813, 213.84375, 460, 267.96094, 403.07813, 266.96094, 536.21875, 215.17188, 499.96875, 616.35156, 156.5, 601.46875, 207, 594.6328, 146, 601.3125, 83.640625, 671.27344, 742.4922, 658.21875, 815.2031, 700.6875, 800.5625, 696.14844, 887.8906, 628, 69.02344, 631.5, 82.890625, 341.46094, 173.00781, 375.29688, 221.96094, 827, 886.47656, 789, 767.34375, 771.35156, 904.3828, 815.9531, 939, 763, 939, 763, 912.28125, 737.1094, 901.53125, 733.53125, 903.4375, 689.1797, 432.89063, 694.1875, 561, 647.4375, 599.3125, 559.6797, 505.1328, 546.97656, 474.07813, 455.7422, 145, 457.85938, 146, 715.7969, 412.1797, 534.9531, 405.25, 559.47656, 335.17188, 715.71094, 398.64063, 745.9297, 553.25, 748.2031, 552.7422, 746.22656, 592.3203, 722.21875, 561, 500.0703, 428.85156, 480.42188, 490.97656, 395.22656, 489.02344, 607.5469, 274, 603.53906, 235.95313, 332.4922, 795.21094, 325.46875, 717, 430.47656, 794.2578, 425.53125, 845.0469, 754.1328, 806.3828, 346.04688, 304.78125, 303.92188, 307.64844, 302.9297, 235.57031, 365.8125, 240.9375, 414.15625, 255.90625, 828.9531, 587.90625, 775.2578, 587.0781, 827.03125, 348.75, 791.21875, 385.90625, 715.71094, 371.4375, 54.25, 217.13281, 91, 216.13281, 91, 281, 29.890625, 297.09375, 536.14844, 788.27344, 536.9375, 813.3281, 475.78906, 890.5781, 428.5078, 874.8672, 267.09375, 586.03906, 37.046875, 587.9531, 37.9375, 500.96875, 268.10938, 536.4297, 299.96875, 534.78906, 295.92188, 539.52344, 28, 137, 28, 51.0625, 596.9922, 52.382813, 278.28906, 137, 280.89063, 143.03125, 601.71875, 80.75781, 337.54688, 145, 730.39844, 940.96875, 342, 939.02344, 342, 876.8828, 518.27344, 897.4297, 100.77344, 724, 35.953125, 724, 35.039063, 632.96875, 80.9375, 694.02344, 120.921875, 281, 121.921875, 216.96094, 275.5, 215.99219, 269.21094, 238.38281, 551.47656, 593.02344, 296.89844, 592.0078, 381.72656, 522.96875, 287.3828, 693.02344, 295.3672, 793.8281, 324.5625, 690.0703, 321.71875, 659.77344, 635.5078, 122.078125, 628, 82.296875, 337.3203, 844.03906, 330.34375, 797.1797, 747.65625, 404.6172, 668.6172, 897.0625, 70.64844, 756.0781, 167.89844, 857.9297, 103.171875, 774.46094, 500.97656, 255.90625, 542.4297, 303.95313, 493.71094, 526.02344, 73.85156, 660.0078, 266.57813, 189.96875, 261.1875, 163.96875, 52.742188, 186.92188, 27.101563, 166.92969, 266.22656, 301.89844, 399.85938, 417.6797, 576.1797, 816.35156, 625.8672, 819.0469, 335.2422, 499.14844)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25), PackedInt32Array(26, 27, 28, 29), PackedInt32Array(2, 30, 31, 3), PackedInt32Array(32, 18, 21, 33), PackedInt32Array(34, 23, 22, 35), PackedInt32Array(36, 32, 33, 37), PackedInt32Array(38, 36, 37, 39, 40), PackedInt32Array(41, 42, 43, 44), PackedInt32Array(45, 25, 24, 46, 47), PackedInt32Array(48, 15, 14, 49), PackedInt32Array(50, 48, 49, 51), PackedInt32Array(52, 50, 51, 53), PackedInt32Array(52, 53, 54, 55), PackedInt32Array(56, 27, 26, 57), PackedInt32Array(56, 57, 58, 59), PackedInt32Array(60, 38, 40, 61), PackedInt32Array(61, 40, 62, 63), PackedInt32Array(64, 41, 44, 65), PackedInt32Array(66, 0, 5, 67), PackedInt32Array(20, 19, 68, 69), PackedInt32Array(70, 69, 68, 71), PackedInt32Array(70, 71, 72, 73), PackedInt32Array(74, 70, 73, 75), PackedInt32Array(76, 77, 78, 79, 80), PackedInt32Array(1, 0, 81, 82), PackedInt32Array(83, 84, 85, 86), PackedInt32Array(87, 88, 89, 78, 90), PackedInt32Array(91, 76, 80, 92, 93, 17), PackedInt32Array(94, 95, 29, 28), PackedInt32Array(96, 97, 12, 11, 98, 99), PackedInt32Array(63, 62, 100, 74, 75), PackedInt32Array(101, 102, 103, 104, 105), PackedInt32Array(106, 107, 6, 8), PackedInt32Array(108, 106, 8, 109), PackedInt32Array(85, 108, 109, 110), PackedInt32Array(111, 112, 113, 114), PackedInt32Array(99, 98, 115, 116, 117, 118), PackedInt32Array(119, 120, 121, 55, 54), PackedInt32Array(122, 119, 54), PackedInt32Array(122, 54, 123, 124), PackedInt32Array(125, 126, 127, 128), PackedInt32Array(129, 128, 127, 130, 59, 81, 131), PackedInt32Array(132, 133, 134, 117, 135), PackedInt32Array(136, 137, 138, 139), PackedInt32Array(140, 141, 142, 143), PackedInt32Array(144, 145, 124, 123, 146), PackedInt32Array(142, 66, 67, 104, 103), PackedInt32Array(139, 147, 148, 136), PackedInt32Array(59, 58, 82, 81), PackedInt32Array(13, 149, 150, 9), PackedInt32Array(44, 151, 65), PackedInt32Array(152, 64, 65), PackedInt32Array(152, 65, 59, 130), PackedInt32Array(99, 153, 154, 96), PackedInt32Array(83, 86, 155, 87, 90), PackedInt32Array(85, 110, 86), PackedInt32Array(77, 90, 78), PackedInt32Array(63, 75, 132, 156), PackedInt32Array(46, 157, 47), PackedInt32Array(35, 158, 45, 47, 159, 34), PackedInt32Array(160, 31, 30, 161), PackedInt32Array(162, 79, 78), PackedInt32Array(34, 159, 136, 148), PackedInt32Array(161, 91, 17, 16), PackedInt32Array(138, 9, 150, 163), PackedInt32Array(129, 131, 164, 165), PackedInt32Array(165, 164, 166, 167), PackedInt32Array(114, 167, 166, 111), PackedInt32Array(168, 114, 113, 140), PackedInt32Array(143, 168, 140), PackedInt32Array(103, 143, 142), PackedInt32Array(169, 101, 105, 160, 161), PackedInt32Array(28, 43, 42), PackedInt32Array(94, 28, 42, 161, 30), PackedInt32Array(138, 163, 139), PackedInt32Array(34, 148, 96, 154), PackedInt32Array(146, 162, 78, 144), PackedInt32Array(134, 118, 117), PackedInt32Array(156, 132, 135), PackedInt32Array(156, 135, 170, 171), PackedInt32Array(78, 171, 170, 144), PackedInt32Array(172, 146, 123), PackedInt32Array(172, 123, 14, 17), PackedInt32Array(169, 161, 16)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(15, 950, 846, 964, 860, 48, 0, 46)])
+agent_radius = 5.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bf53h"]
-polygon = PackedVector2Array(-4.202232, 6.7997622, 3.866053, 7.6497326, 3.866053, 30.173944, 46.22455, 30.173944, 46.39264, 33.99881, 3.697964, 34.423798, 4.0341425, 66.29768, 47.064995, 66.51018, 46.728817, 51.423203, 50.090603, 51.21071, 50.258694, 66.51018, 57.65462, 65.872696, 66.22717, 88.609406, 64.2101, 91.79679, 55.46946, 70.760025, 4.3703213, 70.760025, 4.0341425, 100.29649, 33.617855, 99.446526, 33.785942, 103.69637, 3.866053, 105.18382, 4.0341425, 127.07056, 45.552193, 126.85806, 45.88837, 115.170975, 49.418247, 115.80845, 49.082066, 126.85806, 91.94483, 127.07056, 95.97897, 173.18144, 86.73406, 189.54337, 81.52329, 188.48091, 91.104385, 173.18144, 90.936295, 166.38168, 73.118835, 167.65663, 72.78265, 163.19429, 89.92776, 161.91934, 86.73406, 133.02036, 5.042678, 133.44533, 5.2107673, 154.90709, 16.13657, 154.90709, 16.472748, 163.83177, 14.119499, 164.89424, 12.438606, 159.58192, 5.546946, 159.79442, 6.219303, 201.23047, 50.93105, 201.65546, 50.76296, 170.20654, 54.797104, 170.41904, 55.97373, 180.40619, 70.76558, 180.61868, 71.10176, 184.86853, 56.141815, 185.08102, 55.97373, 202.50542, 123.377525, 202.29292, 124.04988, 193.36824, 127.41167, 194.64319, 127.41167, 201.86794, 137.32893, 201.86794, 141.19499, 188.6934, 141.0269, 133.02036, 114.63688, 132.17038, 112.7879, 146.83237, 122.032814, 148.5323, 121.52854, 152.78217, 112.11555, 151.7197, 109.76229, 173.39394, 115.81351, 188.05592, 112.7879, 189.33089, 106.06433, 173.81892, 109.59421, 128.34552, 126.23504, 126.85806, 126.57122, 118.35836, 129.76492, 117.72089, 129.26065, 126.85806, 141.19499, 127.495544, 142.20352, 72.88495, 93.457634, 70.12255, 88.75114, 87.121956, 119.511475, 88.609406, 120.520004, 118.14587, 117.4944, 118.14587, 116.65395, 90.94682, 85.22126, 90.09685, 91.77674, 65.6602, 142.20352, 66.51018, 141.36308, 12.537062, 104.38344, 12.537062, 104.71961, 16.361927, 101.8621, 16.149435, 100.85356, 8.499702, 147.07811, 8.924688, 145.39722, 208.24272, -1.6808927, 208.03023)
+polygon = PackedVector2Array(9.578107, 6.772965, 12.742555, 6.772965, 12.770809, 7.6308737, 9.60636, 7.585721, 7.7415967, 9.527304, 3.3057182, 9.572457, 3.2774644, 12.4622555, 2.7123842, 12.4622555, 2.7123842, 9.527304, 1.6669861, 9.572457, 1.6387322, 8.669395, 7.5720725, 8.804854)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_71axn"]
-polygon = PackedVector2Array(49.250156, 112.40857, 46.22455, 112.196075, 46.728817, 84.572044, 16.304659, 85.20952, 16.13657, 81.597145, 49.754425, 81.80964)
+polygon = PackedVector2Array(63.524857, 48.43065, 69.40798, 50.555576, 82.855125, 50.555576, 88.73825, 46.943203, 90.08296, 49.9181, 84.031746, 53.317978, 69.74416, 53.317978, 62.68441, 50.555576)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dahhg"]
-polygon = PackedVector2Array(14.287588, 145.5574, 13.447142, 141.30756, 53.313343, 141.25998, 53.788567, 147.68234, 64.37819, 147.89484, 64.88246, 151.29471, 53.788567, 151.29471, 54.629013, 167.86913, 50.93105, 167.65663, 49.079056, 145.869)
+polygon = PackedVector2Array(78.02032, 35.698753, 77.85223, 32.08638, 99.19956, 32.08638, 100.3493, 45.048424, 123.377525, 45.048424, 123.209435, 48.87329, 100.51739, 49.085785, 101.18974, 57.1605, 98.836494, 57.1605, 96.00587, 35.698753)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3so38"]
-polygon = PackedVector2Array(128.75638, 143.43248, 119.0072, 142.58252, 119.0072, 138.54515, 132.11816, 140.03261, 132.62244, 162.13184, 127.91593, 193.15575, 124.89033, 190.60583, 128.58829, 162.55682, 119.34338, 161.91934, 119.34338, 158.94444, 128.58829, 159.79442)
+polygon = PackedVector2Array(104.28665, 32.19052, 102.10149, 18.803492, 105.391975, 18.699347, 106.06433, 26.986557, 133.79906, 27.624035, 135.31186, 60.34789, 132.28625, 61.19786, 130.60536, 32.08638)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3cx6b"]
-polygon = PackedVector2Array(126.57122, 116.23344, 126.52297, 85.10201, 121.14411, 83.82706, 121.14411, 80.21468, 130.49239, 81.909584, 129.933, 115.170975)
+polygon = PackedVector2Array(-4.202232, 6.7997622, 3.866053, 7.6497326, 3.866053, 30.173944, 46.22455, 30.173944, 43.535122, 33.78632, 3.697964, 34.423798, 4.202232, 64.17276, 45.552193, 65.23522, 46.05646, 51.635696, 50.090603, 51.21071, 50.258694, 66.51018, 57.65462, 65.872696, 66.22717, 88.609406, 64.2101, 91.79679, 55.30137, 71.60999, 5.546946, 71.39751, 5.3788567, 98.809044, 35.130657, 98.809044, 35.298748, 105.18382, 5.546946, 105.39632, 5.3788567, 126.008095, 45.720284, 125.58311, 45.88837, 115.170975, 48.91398, 115.595955, 49.082066, 126.85806, 91.94483, 127.07056, 95.97897, 173.18144, 86.73406, 189.54337, 81.52329, 188.48091, 91.104385, 173.18144, 90.936295, 166.38168, 73.118835, 167.65663, 72.78265, 163.19429, 89.92776, 161.91934, 86.73406, 133.02036, 5.042678, 133.44533, 5.2107673, 154.90709, 16.13657, 154.90709, 16.472748, 163.83177, 14.119499, 164.89424, 12.438606, 159.58192, 5.546946, 159.79442, 6.219303, 201.23047, 50.93105, 201.65546, 50.76296, 170.20654, 54.797104, 170.41904, 55.97373, 180.40619, 70.76558, 180.61868, 71.10176, 184.86853, 56.646084, 185.29352, 56.646084, 200.59299, 123.545616, 201.01797, 124.04988, 193.36824, 127.41167, 194.64319, 127.41167, 200.59299, 137.8332, 200.59299, 139.85028, 188.48091, 140.01836, 133.87032, 114.63688, 132.17038, 112.45172, 153.20714, 121.02428, 152.99464, 120.01574, 155.54456, 112.11555, 156.81952, 109.76229, 173.39394, 115.81351, 188.05592, 112.7879, 189.33089, 106.06433, 173.81892, 109.59421, 128.34552, 126.23504, 126.85806, 126.57122, 118.35836, 129.76492, 117.72089, 129.42874, 125.7956, 140.18645, 126.008095, 139.85028, 73.09744, 93.457634, 70.12255, 88.75114, 87.121956, 119.511475, 88.609406, 120.520004, 118.14587, 117.4944, 118.14587, 116.65395, 90.94682, 85.22126, 90.09685, 91.77674, 65.6602, 142.20352, 66.51018, 141.36308, 13.812017, 104.71961, 13.5995245, 104.71961, 16.361927, 101.8621, 16.149435, 100.85356, 8.499702, 147.07811, 8.924688, 145.39722, 208.24272, -1.6808927, 208.03023)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wxwew"]
-polygon = PackedVector2Array(20.393642, 183.9161, 20.561731, 187.95348, 35.689766, 187.74098, 35.52168, 183.27864, 28.125748, 183.70361)
+polygon = PackedVector2Array(49.586334, 112.62106, 45.720284, 112.83356, 45.88837, 84.572044, 16.304659, 85.20952, 16.13657, 81.597145, 49.754425, 81.80964)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_acvyw"]
+polygon = PackedVector2Array(14.287588, 146.40738, 13.447142, 141.30756, 53.313343, 141.25998, 53.788567, 147.68234, 64.37819, 147.89484, 64.88246, 151.29471, 53.788567, 151.29471, 54.96519, 167.86913, 50.42678, 167.65663, 49.082066, 146.19489)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_alh3a"]
+polygon = PackedVector2Array(127.74785, 142.79501, 119.511475, 141.52005, 119.84765, 138.97014, 131.95007, 140.03261, 131.78198, 162.9818, 128.92447, 191.03082, 124.89033, 190.60583, 127.74785, 170.41904, 118.50294, 169.14409, 118.166756, 166.59418, 127.075485, 166.38168)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4q8tf"]
+polygon = PackedVector2Array(126.23504, 116.23344, 126.52297, 85.10201, 121.14411, 83.82706, 121.14411, 80.21468, 132.11816, 82.8721, 130.77345, 114.95848)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x3xnh"]
+polygon = PackedVector2Array(20.002623, 181.89365, 20.561731, 187.95348, 35.689766, 187.74098, 35.634926, 181.68115, 28.238998, 183.38109)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8r6kd"]
+polygon = PackedVector2Array(91.44057, 101.99644, 92.95337, 106.67127, 82.86801, 110.708626, 64.37819, 110.07115, 57.48653, 105.60881, 59.5036, 100.72148, 66.22717, 104.97133, 80.85094, 105.39632)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3xnh"]
+size = Vector2(882, 49)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rajel"]
+texture = ExtResource("9_bf53h")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.873226, -4.2640734, 4.771701, -4.162548, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.873226, -4.2640734, 4.771701, -4.162548, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 6.019449, 4.79099, 6.142296, -5.036683)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 5.2823753, 2.8254557, -4.790991, 3.071147)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 5.1595287, 3.9310694, -5.1595287, 4.053916)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.2823744, -5.1595287, -5.2823744, 5.159528, 8, 8, 8, -8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.142296, -5.1595287, -5.896604, 4.9138365, 8, 8, 8, -8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 5.2823753, 4.668145, 5.6509113, -4.790991)
+
+[sub_resource type="TileSet" id="TileSet_vvhu1"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_rajel")
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_tfod6"]
+_data = PackedByteArray("AAADAAUAAAABAAAAQAAAACAAAABiAQAAUklGRloBAABXRUJQVlA4TE0BAAAvP8AHEDdAkG2bXEZyhVsc4ATZtsllJFe4xQFOkG2bXEZyhVsc4PMfAKDqv7a2SQKSA8By2mqgApTueCQ14IdcgHbgrjAUYMP23wPB6YdrRP8nAP+nLyS5/QZ6ll9GOyLC5hfxEpGkJuLBL6kvSYvNo/ySJDWdNCSpWao3m6WrJH1Ib5J0WrjZxYosNd2QpLxQbWwfNsVC5Lkcc7y7dWufOaml6CRpCKkEULntB4/P8eliTh9dxPCmubsHT9z5DACUmoiIJBFA5bZve7vz+HQBAJSaiCQRAG7rDhPwOjkRc4Pn3C2gfo04lviG9zFnrxpsj88lss8592eWE9JLJgEwZ4852z5vAVSnNdcCqLPXFkAlknebJDV5OB6O8CV8KQBs1MSRjEjaAKhfQ01IkRRHTDeSIkl6wZRaPpUzILebDUnMc7nEck1i9UyJPyMA")
+size_override = Vector2(64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rajel"]
+atlas = SubResource("PortableCompressedTexture2D_tfod6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvhu1"]
+atlas = SubResource("PortableCompressedTexture2D_tfod6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lbihj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rajel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rajel")
+}],
+"loop": true,
+"name": &"Close",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvhu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvhu1")
+}],
+"loop": true,
+"name": &"Open",
+"speed": 1.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4q8tf"]
+height = 28.0
+
+[sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_8r6kd"]
+_data = PackedByteArray("AAADAAUAAAABAAAAQAAAACAAAAByAQAAUklGRmoBAABXRUJQVlA4TF0BAAAvP8AHEE+gqG0bOFmVQvvdTWaK2raBk1UptN/dZKaobRs4WZVC+91NZvMfAABIUkSw7e5kJkn+X3cDHG2bFCkrN8DJlkJDlwtouFL9dIr2pkhNx0g/VIpzXbqqh0LjiP4zcNu2kdzdG0L7i8b/lBkAgBEzHQBWAWjZuOEhBWkTL9n6Ibmo25Bapt4FApXooqk7IgBUAbChRgnRq4GwvFakLfQQ0Se9jvOZtVsusr0mJOl9ks5nluUYo4uB3D23pWFE71NCZGn66ggrfZTbauLRJ5+QsaQKFF2gQJkOYvKJWS23MuqOJg8pkIsaTLx0w74AJQ/TKNkoXuTePJdvSkYPnleUQOmxMyg9+szMUx9cq4+WHjsD7VEsT77fnccqxBoPHHzi4R6m6ROP7jjVEDOT5/Ka0cPFoC4lRLuHK6jsHoHExOyhr1TZmD2qDEUye2BtNiwey2u1aRs8fjwNAA==")
+size_override = Vector2(64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfod6"]
+atlas = SubResource("PortableCompressedTexture2D_8r6kd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbihj"]
+atlas = SubResource("PortableCompressedTexture2D_8r6kd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_raj38"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfod6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfod6")
+}],
+"loop": true,
+"name": &"Close",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbihj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbihj")
+}],
+"loop": true,
+"name": &"Open",
+"speed": 1.0
+}]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_j5yw3")
 
 [node name="Player" parent="." instance=ExtResource("2_xkndl")]
-position = Vector2(58, 125)
+z_index = 2
+position = Vector2(183, 113)
 
 [node name="PointLight2D" parent="Player" index="2"]
 position = Vector2(0, -4.9999957)
-rotation = 3.1415927
-scale = Vector2(2.498108, 1.4707041)
-energy = 3.0
-shadow_color = Color(0.48392218, 0.40211698, 0.43221784, 0)
+scale = Vector2(2.75, 2.75)
+
+[node name="PointLight2D2" type="PointLight2D" parent="Player"]
+position = Vector2(0, -4.9999957)
+scale = Vector2(0.17857137, 0.17857158)
+shadow_enabled = true
+texture = ExtResource("8_2irst")
+texture_scale = 0.35
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
 
-[node name="Fondo" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(431.86877, 511.2971)
 rotation = -1.5707964
-scale = Vector2(14.628425, 13.7447815)
+scale = Vector2(16.828424, 13.7447815)
 texture = SubResource("GradientTexture2D_fc0e3")
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.5211406, 0.5211406, 0.5211405, 1)
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="MapLayout" parent="Node2D" instance=ExtResource("2_j5yw3")]
 metadata/_edit_lock_ = true
 
-[node name="Polygon2D" parent="Node2D/MapLayout" index="0"]
-position = Vector2(0.33617854, -0.42498514)
-polygon = PackedVector2Array(92.61719, 108.58371, 85.22126, 111.771095, 68.74851, 111.771095, 58.831245, 108.58371, 60.00787, 104.54635, 69.08469, 108.15872, 84.71699, 108.15872, 91.104385, 105.60881)
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.21461672, 0.2217302, 0.21699229, 1)
+metadata/_edit_lock_ = true
 
-[node name="Line2D" parent="Node2D/MapLayout" index="1"]
-points = PackedVector2Array(92.61719, 108.58371, 85.22126, 111.771095, 68.74851, 111.771095, 58.831245, 108.58371, 60.00787, 104.54635, 69.08469, 108.15872, 84.71699, 108.15872, 91.104385, 105.60881, 92.61719, 108.58371)
-width = 2.0
-default_color = Color(0, 0, 0, 1)
+[node name="Fish" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("5_b2bpf")]
+position = Vector2(74, 99)
+collision_layer = 2
+collision_mask = 2
+motion_mode = 1
+goal = NodePath("../Goal")
 
-[node name="LightOccluder2D" parent="Node2D/MapLayout" index="2"]
-occluder = SubResource("OccluderPolygon2D_kldst")
+[node name="Area2D" parent="Fish" index="0"]
+collision_layer = 3
+collision_mask = 3
 
-[node name="MapLayout2" parent="Node2D" instance=ExtResource("2_j5yw3")]
+[node name="Sprite2D" parent="Fish" index="2"]
+texture_filter = 1
+scale = Vector2(1, 1)
+texture = ExtResource("4_fgofq")
+
+[node name="NavigationAgent2D" parent="Fish" index="3"]
+target_desired_distance = 10.0
+navigation_layers = 67
+debug_enabled = false
+
+[node name="Goal" type="Area2D" parent="."]
+position = Vector2(264, 115)
+collision_layer = 2
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("CircleShape2D_fgofq")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_7lihs")
+metadata/_edit_lock_ = true
+
+[node name="Map" type="Node2D" parent="NavigationRegion2D"]
+metadata/_edit_lock_ = true
+
+[node name="MapLayout2" parent="NavigationRegion2D/Map" instance=ExtResource("2_j5yw3")]
 scale = Vector2(35.393215, 22.146873)
 metadata/_edit_lock_ = true
 
-[node name="Polygon2D" parent="Node2D/MapLayout2" index="0"]
-polygon = PackedVector2Array(8.928265, 7.089037, 12.714301, 6.772965, 12.742555, 7.6308737, 9.18255, 7.72118, 7.7415967, 9.527304, 3.3057182, 9.572457, 3.2774644, 12.95894, 2.8819082, 12.95894, 2.8536541, 9.527304, 1.6669861, 9.572457, 1.6387322, 8.669395, 7.5720725, 8.804854)
+[node name="Polygon2D" parent="NavigationRegion2D/Map/MapLayout2" index="0"]
+polygon = PackedVector2Array(9.578107, 6.772965, 12.742555, 6.772965, 12.770809, 7.6308737, 9.60636, 7.585721, 7.7415967, 9.527304, 3.3057182, 9.572457, 3.2774644, 12.4622555, 2.7123842, 12.4622555, 2.7123842, 9.527304, 1.6669861, 9.572457, 1.6387322, 8.669395, 7.5720725, 8.804854)
 
-[node name="Line2D" parent="Node2D/MapLayout2" index="1"]
-points = PackedVector2Array(8.928265, 7.089037, 12.714301, 6.772965, 12.742555, 7.6308737, 9.18255, 7.72118, 7.7415967, 9.527304, 3.3057182, 9.572457, 3.2774644, 12.95894, 2.8819082, 12.95894, 2.8536541, 9.527304, 1.6669861, 9.572457, 1.6387322, 8.669395, 7.5720725, 8.804854, 8.928265, 7.089037)
+[node name="Line2D" parent="NavigationRegion2D/Map/MapLayout2" index="1"]
+points = PackedVector2Array(9.578107, 6.772965, 12.742555, 6.772965, 12.770809, 7.6308737, 9.60636, 7.585721, 7.7415967, 9.527304, 3.3057182, 9.572457, 3.2774644, 12.4622555, 2.7123842, 12.4622555, 2.7123842, 9.527304, 1.6669861, 9.572457, 1.6387322, 8.669395, 7.5720725, 8.804854, 9.578107, 6.772965)
 width = 0.575
-default_color = Color(0, 0, 0, 1)
 
-[node name="LightOccluder2D" parent="Node2D/MapLayout2" index="2"]
-occluder = SubResource("OccluderPolygon2D_b2bpf")
-
-[node name="MapLayout3" parent="Node2D" instance=ExtResource("2_j5yw3")]
-metadata/_edit_lock_ = true
-
-[node name="Polygon2D" parent="Node2D/MapLayout3" index="0"]
-polygon = PackedVector2Array(63.524857, 48.43065, 69.40798, 50.555576, 82.855125, 50.555576, 88.73825, 46.943203, 90.08296, 49.9181, 84.031746, 53.317978, 69.74416, 53.317978, 62.68441, 50.555576)
-
-[node name="Line2D" parent="Node2D/MapLayout3" index="1"]
-points = PackedVector2Array(63.524857, 48.43065, 69.40798, 50.555576, 82.855125, 50.555576, 88.73825, 46.943203, 90.08296, 49.9181, 84.031746, 53.317978, 69.74416, 53.317978, 62.68441, 50.555576, 63.524857, 48.43065)
-width = 2.0
-default_color = Color(0, 0, 0, 1)
-
-[node name="LightOccluder2D" parent="Node2D/MapLayout3" index="2"]
-occluder = SubResource("OccluderPolygon2D_7lihs")
-
-[node name="MapLayout4" parent="Node2D" instance=ExtResource("2_j5yw3")]
-metadata/_edit_lock_ = true
-
-[node name="Polygon2D" parent="Node2D/MapLayout4" index="0"]
-polygon = PackedVector2Array(78.02032, 35.698753, 77.85223, 32.08638, 99.19956, 32.08638, 100.3493, 45.048424, 123.377525, 45.048424, 123.209435, 48.87329, 100.51739, 49.085785, 101.18974, 57.1605, 98.836494, 57.1605, 96.00587, 35.698753)
-
-[node name="Line2D" parent="Node2D/MapLayout4" index="1"]
-points = PackedVector2Array(78.02032, 35.698753, 77.85223, 32.08638, 99.19956, 32.08638, 100.3493, 45.048424, 123.377525, 45.048424, 123.209435, 48.87329, 100.51739, 49.085785, 101.18974, 57.1605, 98.836494, 57.1605, 96.00587, 35.698753, 78.02032, 35.698753)
-width = 2.0
-default_color = Color(0, 0, 0, 1)
-
-[node name="LightOccluder2D" parent="Node2D/MapLayout4" index="2"]
-occluder = SubResource("OccluderPolygon2D_fgofq")
-
-[node name="MapLayout5" parent="Node2D" instance=ExtResource("2_j5yw3")]
-metadata/_edit_lock_ = true
-
-[node name="Polygon2D" parent="Node2D/MapLayout5" index="0"]
-polygon = PackedVector2Array(104.28665, 32.19052, 102.10149, 18.803492, 105.391975, 18.699347, 106.400505, 28.474005, 133.79906, 27.624035, 135.31186, 60.34789, 132.28625, 61.19786, 130.60536, 32.08638)
-
-[node name="Line2D" parent="Node2D/MapLayout5" index="1"]
-points = PackedVector2Array(104.28665, 32.19052, 102.10149, 18.803492, 105.391975, 18.699347, 106.400505, 28.474005, 133.79906, 27.624035, 135.31186, 60.34789, 132.28625, 61.19786, 130.60536, 32.08638, 104.28665, 32.19052)
-width = 2.0
-default_color = Color(0, 0, 0, 1)
-
-[node name="LightOccluder2D" parent="Node2D/MapLayout5" index="2"]
-occluder = SubResource("OccluderPolygon2D_2irst")
-
-[node name="MapLayout6" parent="Node2D" instance=ExtResource("2_j5yw3")]
-metadata/_edit_lock_ = true
-
-[node name="Polygon2D" parent="Node2D/MapLayout6" index="0"]
-polygon = PackedVector2Array(-4.202232, 6.7997622, 3.866053, 7.6497326, 3.866053, 30.173944, 46.22455, 30.173944, 46.39264, 33.99881, 3.697964, 34.423798, 4.0341425, 66.29768, 47.064995, 66.51018, 46.728817, 51.423203, 50.090603, 51.21071, 50.258694, 66.51018, 57.65462, 65.872696, 66.22717, 88.609406, 64.2101, 91.79679, 55.46946, 70.760025, 4.3703213, 70.760025, 4.0341425, 100.29649, 33.617855, 99.446526, 33.785942, 103.69637, 3.866053, 105.18382, 4.0341425, 127.07056, 45.552193, 126.85806, 45.88837, 115.170975, 49.418247, 115.80845, 49.082066, 126.85806, 91.94483, 127.07056, 95.97897, 173.18144, 86.73406, 189.54337, 81.52329, 188.48091, 91.104385, 173.18144, 90.936295, 166.38168, 73.118835, 167.65663, 72.78265, 163.19429, 89.92776, 161.91934, 86.73406, 133.02036, 5.042678, 133.44533, 5.2107673, 154.90709, 16.13657, 154.90709, 16.472748, 163.83177, 14.119499, 164.89424, 12.438606, 159.58192, 5.546946, 159.79442, 6.219303, 201.23047, 50.93105, 201.65546, 50.76296, 170.20654, 54.797104, 170.41904, 55.97373, 180.40619, 70.76558, 180.61868, 71.10176, 184.86853, 56.141815, 185.08102, 55.97373, 202.50542, 123.377525, 202.29292, 124.04988, 193.36824, 127.41167, 194.64319, 127.41167, 201.86794, 137.32893, 201.86794, 141.19499, 188.6934, 141.0269, 133.02036, 114.63688, 132.17038, 112.7879, 146.83237, 122.032814, 148.5323, 121.52854, 152.78217, 112.11555, 151.7197, 109.76229, 173.39394, 115.81351, 188.05592, 112.7879, 189.33089, 106.06433, 173.81892, 109.59421, 128.34552, 126.23504, 126.85806, 126.57122, 118.35836, 129.76492, 117.72089, 129.26065, 126.85806, 141.19499, 127.495544, 142.20352, 72.88495, 93.457634, 70.12255, 88.75114, 87.121956, 119.511475, 88.609406, 120.520004, 118.14587, 117.4944, 118.14587, 116.65395, 90.94682, 85.22126, 90.09685, 91.77674, 65.6602, 142.20352, 66.51018, 141.36308, 12.537062, 104.38344, 12.537062, 104.71961, 16.361927, 101.8621, 16.149435, 100.85356, 8.499702, 147.07811, 8.924688, 145.39722, 208.24272, -1.6808927, 208.03023)
-
-[node name="Line2D" parent="Node2D/MapLayout6" index="1"]
-points = PackedVector2Array(-4.202232, 6.7997622, 3.866053, 7.6497326, 3.866053, 30.173944, 46.22455, 30.173944, 46.39264, 33.99881, 3.697964, 34.423798, 4.0341425, 66.29768, 47.064995, 66.51018, 46.728817, 51.423203, 50.090603, 51.21071, 50.258694, 66.51018, 57.65462, 65.872696, 66.22717, 88.609406, 64.2101, 91.79679, 55.46946, 70.760025, 4.3703213, 70.760025, 4.0341425, 100.29649, 33.617855, 99.446526, 33.785942, 103.69637, 3.866053, 105.18382, 4.0341425, 127.07056, 45.552193, 126.85806, 45.88837, 115.170975, 49.418247, 115.80845, 49.082066, 126.85806, 91.94483, 127.07056, 95.97897, 173.18144, 86.73406, 189.54337, 81.52329, 188.48091, 91.104385, 173.18144, 90.936295, 166.38168, 73.118835, 167.65663, 72.78265, 163.19429, 89.92776, 161.91934, 86.73406, 133.02036, 5.042678, 133.44533, 5.2107673, 154.90709, 16.13657, 154.90709, 16.472748, 163.83177, 14.119499, 164.89424, 12.438606, 159.58192, 5.546946, 159.79442, 6.219303, 201.23047, 50.93105, 201.65546, 50.76296, 170.20654, 54.797104, 170.41904, 55.97373, 180.40619, 70.76558, 180.61868, 71.10176, 184.86853, 56.141815, 185.08102, 55.97373, 202.50542, 123.377525, 202.29292, 124.04988, 193.36824, 127.41167, 194.64319, 127.41167, 201.86794, 137.32893, 201.86794, 141.19499, 188.6934, 141.0269, 133.02036, 114.63688, 132.17038, 112.7879, 146.83237, 122.032814, 148.5323, 121.52854, 152.78217, 112.11555, 151.7197, 109.76229, 173.39394, 115.81351, 188.05592, 112.7879, 189.33089, 106.06433, 173.81892, 109.59421, 128.34552, 126.23504, 126.85806, 126.57122, 118.35836, 129.76492, 117.72089, 129.26065, 126.85806, 141.19499, 127.495544, 142.20352, 72.88495, 93.457634, 70.12255, 88.75114, 87.121956, 119.511475, 88.609406, 120.520004, 118.14587, 117.4944, 118.14587, 116.65395, 90.94682, 85.22126, 90.09685, 91.77674, 65.6602, 142.20352, 66.51018, 141.36308, 12.537062, 104.38344, 12.537062, 104.71961, 16.361927, 101.8621, 16.149435, 100.85356, 8.499702, 147.07811, 8.924688, 145.39722, 208.24272, -1.6808927, 208.03023, -4.202232, 6.7997622)
-width = 2.0
-default_color = Color(0, 0, 0, 1)
-
-[node name="LightOccluder2D" parent="Node2D/MapLayout6" index="2"]
+[node name="LightOccluder2D" parent="NavigationRegion2D/Map/MapLayout2" index="2"]
 occluder = SubResource("OccluderPolygon2D_bf53h")
 
-[node name="MapLayout7" parent="Node2D" instance=ExtResource("2_j5yw3")]
+[node name="MapLayout3" parent="NavigationRegion2D/Map" instance=ExtResource("2_j5yw3")]
 metadata/_edit_lock_ = true
 
-[node name="Polygon2D" parent="Node2D/MapLayout7" index="0"]
-polygon = PackedVector2Array(49.250156, 112.40857, 46.22455, 112.196075, 46.728817, 84.572044, 16.304659, 85.20952, 16.13657, 81.597145, 49.754425, 81.80964)
+[node name="Polygon2D" parent="NavigationRegion2D/Map/MapLayout3" index="0"]
+polygon = PackedVector2Array(63.524857, 48.43065, 69.40798, 50.555576, 82.855125, 50.555576, 88.73825, 46.943203, 90.08296, 49.9181, 84.031746, 53.317978, 69.74416, 53.317978, 62.68441, 50.555576)
 
-[node name="Line2D" parent="Node2D/MapLayout7" index="1"]
-points = PackedVector2Array(49.250156, 112.40857, 46.22455, 112.196075, 46.728817, 84.572044, 16.304659, 85.20952, 16.13657, 81.597145, 49.754425, 81.80964, 49.250156, 112.40857)
+[node name="Line2D" parent="NavigationRegion2D/Map/MapLayout3" index="1"]
+points = PackedVector2Array(63.524857, 48.43065, 69.40798, 50.555576, 82.855125, 50.555576, 88.73825, 46.943203, 90.08296, 49.9181, 84.031746, 53.317978, 69.74416, 53.317978, 62.68441, 50.555576, 63.524857, 48.43065)
 width = 2.0
-default_color = Color(0, 0, 0, 1)
 
-[node name="LightOccluder2D" parent="Node2D/MapLayout7" index="2"]
+[node name="LightOccluder2D" parent="NavigationRegion2D/Map/MapLayout3" index="2"]
 occluder = SubResource("OccluderPolygon2D_71axn")
 
-[node name="MapLayout8" parent="Node2D" instance=ExtResource("2_j5yw3")]
+[node name="MapLayout4" parent="NavigationRegion2D/Map" instance=ExtResource("2_j5yw3")]
 metadata/_edit_lock_ = true
 
-[node name="Polygon2D" parent="Node2D/MapLayout8" index="0"]
-polygon = PackedVector2Array(14.287588, 145.5574, 13.447142, 141.30756, 53.313343, 141.25998, 53.788567, 147.68234, 64.37819, 147.89484, 64.88246, 151.29471, 53.788567, 151.29471, 54.629013, 167.86913, 50.93105, 167.65663, 49.079056, 145.869)
+[node name="Polygon2D" parent="NavigationRegion2D/Map/MapLayout4" index="0"]
+polygon = PackedVector2Array(78.02032, 35.698753, 77.85223, 32.08638, 99.19956, 32.08638, 100.3493, 45.048424, 123.377525, 45.048424, 123.209435, 48.87329, 100.51739, 49.085785, 101.18974, 57.1605, 98.836494, 57.1605, 96.00587, 35.698753)
 
-[node name="Line2D" parent="Node2D/MapLayout8" index="1"]
-points = PackedVector2Array(14.287588, 145.5574, 13.447142, 141.30756, 53.313343, 141.25998, 53.788567, 147.68234, 64.37819, 147.89484, 64.88246, 151.29471, 53.788567, 151.29471, 54.629013, 167.86913, 50.93105, 167.65663, 49.079056, 145.869, 14.287588, 145.5574)
+[node name="Line2D" parent="NavigationRegion2D/Map/MapLayout4" index="1"]
+points = PackedVector2Array(78.02032, 35.698753, 77.85223, 32.08638, 99.19956, 32.08638, 100.3493, 45.048424, 123.377525, 45.048424, 123.209435, 48.87329, 100.51739, 49.085785, 101.18974, 57.1605, 98.836494, 57.1605, 96.00587, 35.698753, 78.02032, 35.698753)
 width = 2.0
-default_color = Color(0, 0, 0, 1)
 
-[node name="LightOccluder2D" parent="Node2D/MapLayout8" index="2"]
+[node name="LightOccluder2D" parent="NavigationRegion2D/Map/MapLayout4" index="2"]
 occluder = SubResource("OccluderPolygon2D_dahhg")
 
-[node name="MapLayout9" parent="Node2D" instance=ExtResource("2_j5yw3")]
+[node name="MapLayout5" parent="NavigationRegion2D/Map" instance=ExtResource("2_j5yw3")]
 metadata/_edit_lock_ = true
 
-[node name="Polygon2D" parent="Node2D/MapLayout9" index="0"]
-polygon = PackedVector2Array(128.75638, 143.43248, 119.0072, 142.58252, 119.0072, 138.54515, 132.11816, 140.03261, 132.62244, 162.13184, 127.91593, 193.15575, 124.89033, 190.60583, 128.58829, 162.55682, 119.34338, 161.91934, 119.34338, 158.94444, 128.58829, 159.79442)
+[node name="Polygon2D" parent="NavigationRegion2D/Map/MapLayout5" index="0"]
+polygon = PackedVector2Array(104.28665, 32.19052, 102.10149, 18.803492, 105.391975, 18.699347, 106.06433, 26.986557, 133.79906, 27.624035, 135.31186, 60.34789, 132.28625, 61.19786, 130.60536, 32.08638)
 
-[node name="Line2D" parent="Node2D/MapLayout9" index="1"]
-points = PackedVector2Array(128.75638, 143.43248, 119.0072, 142.58252, 119.0072, 138.54515, 132.11816, 140.03261, 132.62244, 162.13184, 127.91593, 193.15575, 124.89033, 190.60583, 128.58829, 162.55682, 119.34338, 161.91934, 119.34338, 158.94444, 128.58829, 159.79442, 128.75638, 143.43248)
+[node name="Line2D" parent="NavigationRegion2D/Map/MapLayout5" index="1"]
+points = PackedVector2Array(104.28665, 32.19052, 102.10149, 18.803492, 105.391975, 18.699347, 106.06433, 26.986557, 133.79906, 27.624035, 135.31186, 60.34789, 132.28625, 61.19786, 130.60536, 32.08638, 104.28665, 32.19052)
 width = 2.0
-default_color = Color(0, 0, 0, 1)
 
-[node name="LightOccluder2D" parent="Node2D/MapLayout9" index="2"]
+[node name="LightOccluder2D" parent="NavigationRegion2D/Map/MapLayout5" index="2"]
 occluder = SubResource("OccluderPolygon2D_3so38")
 
-[node name="MapLayout10" parent="Node2D" instance=ExtResource("2_j5yw3")]
+[node name="MapLayout6" parent="NavigationRegion2D/Map" instance=ExtResource("2_j5yw3")]
 metadata/_edit_lock_ = true
 
-[node name="Polygon2D" parent="Node2D/MapLayout10" index="0"]
-polygon = PackedVector2Array(126.57122, 116.23344, 126.52297, 85.10201, 121.14411, 83.82706, 121.14411, 80.21468, 130.49239, 81.909584, 129.933, 115.170975)
+[node name="Polygon2D" parent="NavigationRegion2D/Map/MapLayout6" index="0"]
+polygon = PackedVector2Array(-4.202232, 6.7997622, 3.866053, 7.6497326, 3.866053, 30.173944, 46.22455, 30.173944, 43.535122, 33.78632, 3.697964, 34.423798, 4.202232, 64.17276, 45.552193, 65.23522, 46.05646, 51.635696, 50.090603, 51.21071, 50.258694, 66.51018, 57.65462, 65.872696, 66.22717, 88.609406, 64.2101, 91.79679, 55.30137, 71.60999, 5.546946, 71.39751, 5.3788567, 98.809044, 35.130657, 98.809044, 35.298748, 105.18382, 5.546946, 105.39632, 5.3788567, 126.008095, 45.720284, 125.58311, 45.88837, 115.170975, 48.91398, 115.595955, 49.082066, 126.85806, 91.94483, 127.07056, 95.97897, 173.18144, 86.73406, 189.54337, 81.52329, 188.48091, 91.104385, 173.18144, 90.936295, 166.38168, 73.118835, 167.65663, 72.78265, 163.19429, 89.92776, 161.91934, 86.73406, 133.02036, 5.042678, 133.44533, 5.2107673, 154.90709, 16.13657, 154.90709, 16.472748, 163.83177, 14.119499, 164.89424, 12.438606, 159.58192, 5.546946, 159.79442, 6.219303, 201.23047, 50.93105, 201.65546, 50.76296, 170.20654, 54.797104, 170.41904, 55.97373, 180.40619, 70.76558, 180.61868, 71.10176, 184.86853, 56.646084, 185.29352, 56.646084, 200.59299, 123.545616, 201.01797, 124.04988, 193.36824, 127.41167, 194.64319, 127.41167, 200.59299, 137.8332, 200.59299, 139.85028, 188.48091, 140.01836, 133.87032, 114.63688, 132.17038, 112.45172, 153.20714, 121.02428, 152.99464, 120.01574, 155.54456, 112.11555, 156.81952, 109.76229, 173.39394, 115.81351, 188.05592, 112.7879, 189.33089, 106.06433, 173.81892, 109.59421, 128.34552, 126.23504, 126.85806, 126.57122, 118.35836, 129.76492, 117.72089, 129.42874, 125.7956, 140.18645, 126.008095, 139.85028, 73.09744, 93.457634, 70.12255, 88.75114, 87.121956, 119.511475, 88.609406, 120.520004, 118.14587, 117.4944, 118.14587, 116.65395, 90.94682, 85.22126, 90.09685, 91.77674, 65.6602, 142.20352, 66.51018, 141.36308, 13.812017, 104.71961, 13.5995245, 104.71961, 16.361927, 101.8621, 16.149435, 100.85356, 8.499702, 147.07811, 8.924688, 145.39722, 208.24272, -1.6808927, 208.03023)
 
-[node name="Line2D" parent="Node2D/MapLayout10" index="1"]
-points = PackedVector2Array(126.57122, 116.23344, 126.52297, 85.10201, 121.14411, 83.82706, 121.14411, 80.21468, 130.49239, 81.909584, 129.933, 115.170975, 126.57122, 116.23344)
+[node name="Line2D" parent="NavigationRegion2D/Map/MapLayout6" index="1"]
+points = PackedVector2Array(-4.202232, 6.7997622, 3.866053, 7.6497326, 3.866053, 30.173944, 46.22455, 30.173944, 43.535122, 33.78632, 3.697964, 34.423798, 4.202232, 64.17276, 45.552193, 65.23522, 46.05646, 51.635696, 50.090603, 51.21071, 50.258694, 66.51018, 57.65462, 65.872696, 66.22717, 88.609406, 64.2101, 91.79679, 55.30137, 71.60999, 5.546946, 71.39751, 5.3788567, 98.809044, 35.130657, 98.809044, 35.298748, 105.18382, 5.546946, 105.39632, 5.3788567, 126.008095, 45.720284, 125.58311, 45.88837, 115.170975, 48.91398, 115.595955, 49.082066, 126.85806, 91.94483, 127.07056, 95.97897, 173.18144, 86.73406, 189.54337, 81.52329, 188.48091, 91.104385, 173.18144, 90.936295, 166.38168, 73.118835, 167.65663, 72.78265, 163.19429, 89.92776, 161.91934, 86.73406, 133.02036, 5.042678, 133.44533, 5.2107673, 154.90709, 16.13657, 154.90709, 16.472748, 163.83177, 14.119499, 164.89424, 12.438606, 159.58192, 5.546946, 159.79442, 6.219303, 201.23047, 50.93105, 201.65546, 50.76296, 170.20654, 54.797104, 170.41904, 55.97373, 180.40619, 70.76558, 180.61868, 71.10176, 184.86853, 56.646084, 185.29352, 56.646084, 200.59299, 123.545616, 201.01797, 124.04988, 193.36824, 127.41167, 194.64319, 127.41167, 200.59299, 137.8332, 200.59299, 139.85028, 188.48091, 140.01836, 133.87032, 114.63688, 132.17038, 112.45172, 153.20714, 121.02428, 152.99464, 120.01574, 155.54456, 112.11555, 156.81952, 109.76229, 173.39394, 115.81351, 188.05592, 112.7879, 189.33089, 106.06433, 173.81892, 109.59421, 128.34552, 126.23504, 126.85806, 126.57122, 118.35836, 129.76492, 117.72089, 129.42874, 125.7956, 140.18645, 126.008095, 139.85028, 73.09744, 93.457634, 70.12255, 88.75114, 87.121956, 119.511475, 88.609406, 120.520004, 118.14587, 117.4944, 118.14587, 116.65395, 90.94682, 85.22126, 90.09685, 91.77674, 65.6602, 142.20352, 66.51018, 141.36308, 13.812017, 104.71961, 13.5995245, 104.71961, 16.361927, 101.8621, 16.149435, 100.85356, 8.499702, 147.07811, 8.924688, 145.39722, 208.24272, -1.6808927, 208.03023, -4.202232, 6.7997622)
 width = 2.0
-default_color = Color(0, 0, 0, 1)
 
-[node name="LightOccluder2D" parent="Node2D/MapLayout10" index="2"]
+[node name="LightOccluder2D" parent="NavigationRegion2D/Map/MapLayout6" index="2"]
 occluder = SubResource("OccluderPolygon2D_3cx6b")
 
-[node name="MapLayout11" parent="Node2D" instance=ExtResource("2_j5yw3")]
+[node name="MapLayout7" parent="NavigationRegion2D/Map" instance=ExtResource("2_j5yw3")]
 metadata/_edit_lock_ = true
 
-[node name="Polygon2D" parent="Node2D/MapLayout11" index="0"]
-position = Vector2(0.33617854, -0.42498514)
-polygon = PackedVector2Array(20.393642, 183.9161, 20.561731, 187.95348, 35.689766, 187.74098, 35.52168, 183.27864, 28.125748, 183.70361)
+[node name="Polygon2D" parent="NavigationRegion2D/Map/MapLayout7" index="0"]
+polygon = PackedVector2Array(49.586334, 112.62106, 45.720284, 112.83356, 45.88837, 84.572044, 16.304659, 85.20952, 16.13657, 81.597145, 49.754425, 81.80964)
 
-[node name="Line2D" parent="Node2D/MapLayout11" index="1"]
-points = PackedVector2Array(20.393642, 183.9161, 20.561731, 187.95348, 35.689766, 187.74098, 35.52168, 183.27864, 28.125748, 183.70361, 20.393642, 183.9161)
+[node name="Line2D" parent="NavigationRegion2D/Map/MapLayout7" index="1"]
+points = PackedVector2Array(49.586334, 112.62106, 45.720284, 112.83356, 45.88837, 84.572044, 16.304659, 85.20952, 16.13657, 81.597145, 49.754425, 81.80964, 49.586334, 112.62106)
 width = 2.0
-default_color = Color(0, 0, 0, 1)
-texture = ExtResource("4_kldst")
 
-[node name="LightOccluder2D" parent="Node2D/MapLayout11" index="2"]
+[node name="LightOccluder2D" parent="NavigationRegion2D/Map/MapLayout7" index="2"]
 occluder = SubResource("OccluderPolygon2D_wxwew")
 
+[node name="MapLayout8" parent="NavigationRegion2D/Map" instance=ExtResource("2_j5yw3")]
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D" parent="NavigationRegion2D/Map/MapLayout8" index="0"]
+polygon = PackedVector2Array(14.287588, 146.40738, 13.447142, 141.30756, 53.313343, 141.25998, 53.788567, 147.68234, 64.37819, 147.89484, 64.88246, 151.29471, 53.788567, 151.29471, 54.96519, 167.86913, 50.42678, 167.65663, 49.082066, 146.19489)
+
+[node name="Line2D" parent="NavigationRegion2D/Map/MapLayout8" index="1"]
+points = PackedVector2Array(14.287588, 146.40738, 13.447142, 141.30756, 53.313343, 141.25998, 53.788567, 147.68234, 64.37819, 147.89484, 64.88246, 151.29471, 53.788567, 151.29471, 54.96519, 167.86913, 50.42678, 167.65663, 49.082066, 146.19489, 14.287588, 146.40738)
+width = 2.0
+
+[node name="LightOccluder2D" parent="NavigationRegion2D/Map/MapLayout8" index="2"]
+occluder = SubResource("OccluderPolygon2D_acvyw")
+
+[node name="MapLayout9" parent="NavigationRegion2D/Map" instance=ExtResource("2_j5yw3")]
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D" parent="NavigationRegion2D/Map/MapLayout9" index="0"]
+polygon = PackedVector2Array(127.74785, 142.79501, 119.511475, 141.52005, 119.84765, 138.97014, 131.95007, 140.03261, 131.78198, 162.9818, 128.92447, 191.03082, 124.89033, 190.60583, 127.74785, 170.41904, 118.50294, 169.14409, 118.166756, 166.59418, 127.075485, 166.38168)
+
+[node name="Line2D" parent="NavigationRegion2D/Map/MapLayout9" index="1"]
+points = PackedVector2Array(127.74785, 142.79501, 119.511475, 141.52005, 119.84765, 138.97014, 131.95007, 140.03261, 131.78198, 162.9818, 128.92447, 191.03082, 124.89033, 190.60583, 127.74785, 170.41904, 118.50294, 169.14409, 118.166756, 166.59418, 127.075485, 166.38168, 127.74785, 142.79501)
+width = 2.0
+
+[node name="LightOccluder2D" parent="NavigationRegion2D/Map/MapLayout9" index="2"]
+occluder = SubResource("OccluderPolygon2D_alh3a")
+
+[node name="MapLayout10" parent="NavigationRegion2D/Map" instance=ExtResource("2_j5yw3")]
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D" parent="NavigationRegion2D/Map/MapLayout10" index="0"]
+polygon = PackedVector2Array(126.23504, 116.23344, 126.52297, 85.10201, 121.14411, 83.82706, 121.14411, 80.21468, 132.11816, 82.8721, 130.77345, 114.95848)
+
+[node name="Line2D" parent="NavigationRegion2D/Map/MapLayout10" index="1"]
+points = PackedVector2Array(126.23504, 116.23344, 126.52297, 85.10201, 121.14411, 83.82706, 121.14411, 80.21468, 132.11816, 82.8721, 130.77345, 114.95848, 126.23504, 116.23344)
+width = 2.0
+
+[node name="LightOccluder2D" parent="NavigationRegion2D/Map/MapLayout10" index="2"]
+occluder = SubResource("OccluderPolygon2D_4q8tf")
+
+[node name="MapLayout11" parent="NavigationRegion2D/Map" instance=ExtResource("2_j5yw3")]
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D" parent="NavigationRegion2D/Map/MapLayout11" index="0"]
+polygon = PackedVector2Array(20.002623, 181.89365, 20.561731, 187.95348, 35.689766, 187.74098, 35.634926, 181.68115, 28.238998, 183.38109)
+
+[node name="Line2D" parent="NavigationRegion2D/Map/MapLayout11" index="1"]
+points = PackedVector2Array(20.002623, 181.89365, 20.561731, 187.95348, 35.689766, 187.74098, 35.634926, 181.68115, 28.238998, 183.38109, 20.002623, 181.89365)
+width = 2.0
+texture = ExtResource("4_kldst")
+
+[node name="LightOccluder2D" parent="NavigationRegion2D/Map/MapLayout11" index="2"]
+occluder = SubResource("OccluderPolygon2D_x3xnh")
+
+[node name="MapLayout" parent="NavigationRegion2D/Map" instance=ExtResource("2_j5yw3")]
+
+[node name="Polygon2D" parent="NavigationRegion2D/Map/MapLayout" index="0"]
+polygon = PackedVector2Array(91.44057, 101.99644, 92.95337, 106.67127, 82.86801, 110.708626, 64.37819, 110.07115, 57.48653, 105.60881, 59.5036, 100.72148, 66.22717, 104.97133, 80.85094, 105.39632)
+
+[node name="Line2D" parent="NavigationRegion2D/Map/MapLayout" index="1"]
+points = PackedVector2Array(91.44057, 101.99644, 92.95337, 106.67127, 82.86801, 110.708626, 64.37819, 110.07115, 57.48653, 105.60881, 59.5036, 100.72148, 66.22717, 104.97133, 80.85094, 105.39632, 91.44057, 101.99644)
+width = 2.0
+
+[node name="LightOccluder2D" parent="NavigationRegion2D/Map/MapLayout" index="2"]
+occluder = SubResource("OccluderPolygon2D_8r6kd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/Map"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/Map/StaticBody2D"]
+position = Vector2(431, 14.5)
+shape = SubResource("RectangleShape2D_x3xnh")
+
+[node name="Spikes" type="TileMapLayer" parent="NavigationRegion2D"]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAADACQAAAAAAAAAAAAEACQAAAABAAAAAAAFACQAAAAAAAAAAAAGACQAAAABAAAAAAAHACQAAAAAAAAAAAAIACQAAAABAAAAAAAJACQAAAAAAAAAAAAKACQAAAABAAAAAAACACMAAAACAAAAAAACACIAAAACAAAAAAACACEAAAACAAAAAAACACAAAAACAAAAAAADAB8AAAACAAEAAAAEAB8AAAADAAEAAAAFAB8AAAACAAEAAAAGAB8AAAADAAEAAAAHAB8AAAADAAEAAAAIAB8AAAADAAEAAAAJAB8AAAACAAEAAAAKAB8AAAADAAEAAAALAB8AAAACAAEAAAAMAB8AAAADAAEAAAALACQAAAABAAAAAAAMACQAAAABAAAAAAANACQAAAABAAAAAAAOACQAAAAAAAAAAAAPACQAAAAAAAAAAAACABsAAAACAAAAAAACABkAAAACAAAAAAACABcAAAACAAAAAAACABYAAAACAAAAAAACABwAAAADAAAAAAACABoAAAADAAAAAAACABgAAAADAAAAAAACABUAAAADAAAAAAADABwAAAAAAAAAAAAEABwAAAABAAAAAAAFABwAAAAAAAAAAAAGABwAAAAAAAAAAAAHABwAAAABAAAAAAAIABwAAAAAAAAAAAAJABwAAAABAAAAAAALABwAAAAAAAAAAAAMABwAAAABAAAAAAAKABwAAAABAAAAAAACACQAAAACAAAAAAACAB8AAAACAAAAAAAGABUAAAACAAEAAAAFABUAAAACAAEAAAAEABUAAAACAAEAAAADABUAAAACAAEAAAAQABUAAAACAAEAAAAPABUAAAACAAEAAAALABUAAAACAAEAAAAKABUAAAACAAEAAAANABcAAAABAAAAAAAIABcAAAABAAAAAAAQAB4AAAABAAEAAAAQAB0AAAABAAEAAAAQABsAAAABAAEAAAAQABkAAAABAAEAAAAQACAAAAABAAEAAAAQAB8AAAAAAAEAAAAQABwAAAAAAAEAAAAQABoAAAAAAAEAAAAQACIAAAAAAAEAAAAQACQAAAAAAAEAAAAQACMAAAABAAEAAAAFABAAAAABAAEAAAAFAA8AAAAAAAEAAAAQABEAAAAAAAEAAAAQABAAAAABAAEAAAANABIAAAAAAAAAAAAOABIAAAABAAAAAAALABIAAAAAAAAAAAAMABIAAAABAAAAAAAwAAQAAAACAAEAAAAxAAQAAAADAAEAAAAvAAQAAAACAAEAAAAuAAQAAAACAAEAAAAtAAQAAAADAAEAAAAyAAQAAAADAAEAAAAqAAcAAAAAAAAAAAArAAcAAAABAAAAAAAoAAcAAAAAAAAAAAApAAcAAAABAAAAAAAyACQAAAABAAAAAAAzACQAAAAAAAAAAAAxACQAAAAAAAAAAAAxABkAAAACAAAAAAAxABoAAAACAAAAAAAxABsAAAADAAAAAAAzAB0AAAABAAEAAAAzAB4AAAABAAEAAAAzAB8AAAAAAAEAAAAzACAAAAAAAAEAAAAzABcAAAAAAAEAAAAzABYAAAAAAAEAAAAwADoAAAAAAAAAAAAxADoAAAAAAAAAAAAyADoAAAAAAAAAAAAuADAAAAAAAAAAAAAtADAAAAAAAAAAAAAsADAAAAAAAAAAAAAsACwAAAAAAAAAAAArACwAAAAAAAAAAAAqACwAAAAAAAAAAAAxACoAAAACAAAAAAAxACsAAAACAAAAAAAxACwAAAACAAAAAAAxAC0AAAACAAAAAAAzAC8AAAABAAEAAAAzADAAAAABAAEAAAAzADEAAAABAAEAAAAwADYAAAACAAAAAAAwADcAAAACAAAAAAAzADYAAAABAAEAAAAzADUAAAABAAEAAAAzADQAAAABAAEAAAAZADoAAAAAAAAAAAAYADoAAAABAAAAAAAXADoAAAABAAAAAAAWADoAAAAAAAAAAAAVADkAAAACAAAAAAAVADoAAAACAAAAAAAVADcAAAACAAAAAAAVADgAAAADAAAAAAAPACsAAAACAAEAAAANACsAAAACAAEAAAALACsAAAACAAEAAAAKACsAAAACAAEAAAAOACsAAAADAAEAAAAQACsAAAADAAEAAAAMACsAAAADAAEAAAAJACsAAAADAAEAAAAIACsAAAADAAEAAAA=")
+tile_set = SubResource("TileSet_vvhu1")
+
+[node name="Clam" type="StaticBody2D" parent="."]
+position = Vector2(452, 216)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="GemArea" parent="Clam" instance=ExtResource("8_bf53h")]
+position = Vector2(0, 6)
+
+[node name="PointLight2D" parent="Clam/GemArea" index="1"]
+rotation = 1.6493361
+energy = 2.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Clam"]
+texture_filter = 1
+position = Vector2(0, 4)
+sprite_frames = SubResource("SpriteFrames_lbihj")
+animation = &"Open"
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"scale": "1.0",
+"should_round_fps": true,
+"slice": "",
+"source": "res://Sprites/Clam.aseprite",
+"source_uid": 7192875185333962195
+}
+metadata/_aseprite_wizard_source_file_hash_ = "ffb93baf8a8335132f8c4dabb47a0515"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Clam"]
+position = Vector2(0, 6)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_4q8tf")
+
+[node name="ClamTimer" type="Timer" parent="Clam"]
+wait_time = 5.0
+autostart = true
+
+[node name="Chest" type="StaticBody2D" parent="."]
+position = Vector2(167, 844)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="GemArea" parent="Chest" instance=ExtResource("8_bf53h")]
+position = Vector2(0, 2)
+
+[node name="PointLight2D" parent="Chest/GemArea" index="1"]
+scale = Vector2(0.6408899, 0.30455512)
+energy = 2.0
+texture = ExtResource("8_2irst")
+
+[node name="Sprite2D" parent="Chest/GemArea" index="3"]
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "res://Sprites/Chest.aseprite",
+"source_uid": 7801223501608191465
+}
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Chest"]
+texture_filter = 1
+position = Vector2(0, 4)
+sprite_frames = SubResource("SpriteFrames_raj38")
+animation = &"Open"
+metadata/_aseprite_wizard_interface_config_ = {
+"pending_changes": {}
+}
+metadata/_aseprite_wizard_config_ = {
+"embed_tex": true,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"scale": "1.0",
+"should_round_fps": true,
+"slice": "",
+"source": "res://Sprites/Chest.aseprite",
+"source_uid": 7801223501608191465
+}
+metadata/_aseprite_wizard_source_file_hash_ = "5966f8bc32375cf33426203cfa308d69"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chest"]
+position = Vector2(0, 6)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_4q8tf")
+
+[node name="ChestTimer" type="Timer" parent="Chest"]
+wait_time = 5.0
+autostart = true
+
+[node name="GemArea" parent="." instance=ExtResource("8_bf53h")]
+position = Vector2(662, 90)
+
+[node name="PointLight2D" parent="GemArea" index="1"]
+energy = 10.0
+
+[node name="GemArea2" parent="." instance=ExtResource("8_bf53h")]
+position = Vector2(78, 545)
+
+[node name="PointLight2D" parent="GemArea2" index="1"]
+rotation = 3.0979595
+scale = Vector2(0.68549746, 0.24894068)
+energy = 1.0
+
+[node name="GemArea3" parent="." instance=ExtResource("8_bf53h")]
+position = Vector2(807, 549)
+
+[node name="PointLight2D" parent="GemArea3" index="1"]
+scale = Vector2(0.282, 0.265)
+energy = 1.0
+
+[node name="GemArea4" parent="." instance=ExtResource("8_bf53h")]
+position = Vector2(795, 909)
+
+[node name="PointLight2D" parent="GemArea4" index="1"]
+energy = 1.0
+
+[node name="FogSprite" type="Sprite2D" parent="."]
+z_index = 10
+centered = false
+
+[connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]
+[connection signal="timeout" from="Clam/ClamTimer" to="." method="_on_clam_timer_timeout"]
+[connection signal="timeout" from="Chest/ChestTimer" to="." method="_on_chest_timer_timeout"]
+
 [editable path="Player"]
-[editable path="Node2D/MapLayout"]
-[editable path="Node2D/MapLayout2"]
-[editable path="Node2D/MapLayout3"]
-[editable path="Node2D/MapLayout4"]
-[editable path="Node2D/MapLayout5"]
-[editable path="Node2D/MapLayout6"]
-[editable path="Node2D/MapLayout7"]
-[editable path="Node2D/MapLayout8"]
-[editable path="Node2D/MapLayout9"]
-[editable path="Node2D/MapLayout10"]
-[editable path="Node2D/MapLayout11"]
+[editable path="Fish"]
+[editable path="NavigationRegion2D/Map/MapLayout2"]
+[editable path="NavigationRegion2D/Map/MapLayout3"]
+[editable path="NavigationRegion2D/Map/MapLayout4"]
+[editable path="NavigationRegion2D/Map/MapLayout5"]
+[editable path="NavigationRegion2D/Map/MapLayout6"]
+[editable path="NavigationRegion2D/Map/MapLayout7"]
+[editable path="NavigationRegion2D/Map/MapLayout8"]
+[editable path="NavigationRegion2D/Map/MapLayout9"]
+[editable path="NavigationRegion2D/Map/MapLayout10"]
+[editable path="NavigationRegion2D/Map/MapLayout11"]
+[editable path="NavigationRegion2D/Map/MapLayout"]
+[editable path="Clam/GemArea"]
+[editable path="Chest/GemArea"]
+[editable path="GemArea"]
+[editable path="GemArea2"]
+[editable path="GemArea3"]
+[editable path="GemArea4"]

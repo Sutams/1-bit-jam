@@ -13,7 +13,7 @@ config_version=5
 config/name="1 bit jam"
 run/main_scene="uid://cdp1o5j4wv5e5"
 config/features=PackedStringArray("4.5", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://Sprites/icon.svg"
 
 [display]
 
@@ -66,5 +66,4 @@ drop={
 
 [rendering]
 
-renderer/rendering_method="mobile"
 scaling_3d/scale=2.0

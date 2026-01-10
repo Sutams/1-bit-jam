@@ -1,3 +1,46 @@
-[gd_scene format=3 uid="uid://1063cnro2t4i"]
+[gd_scene load_steps=5 format=3 uid="uid://1063cnro2t4i"]
 
-[node name="Fish" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://dhadaijhmoaeg" path="res://Sprites/icon.svg" id="1_15fnf"]
+[ext_resource type="Script" uid="uid://brmkuan418h4u" path="res://Scripts/Fish.gd" id="1_two43"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_two43"]
+radius = 12.288139
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_two43"]
+
+[node name="Fish" type="CharacterBody2D"]
+script = ExtResource("1_two43")
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(2.3599992, 2.3599992)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_two43")
+debug_color = Color(0, 0.63901776, 0.3750227, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+scale = Vector2(0.24000007, 0.24000007)
+shape = SubResource("CapsuleShape2D_two43")
+debug_color = Color(0.9946379, 0, 0.22626597, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.045000017, 0.02250001)
+texture = ExtResource("1_15fnf")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+navigation_layers = 65
+path_postprocessing = 1
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -8,6 +8,8 @@
 
 [node name="MapLayout" type="StaticBody2D"]
 scale = Vector2(5.9492197, 4.7060466)
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_ymxfh")
 metadata/_edit_group_ = true
 
@@ -18,10 +20,11 @@ texture = ExtResource("2_1oxs1")
 [node name="Line2D" type="Line2D" parent="."]
 texture_filter = 1
 texture_repeat = 2
-width = 5.4
+width = 3.885
+default_color = Color(0, 0, 0, 1)
 texture = ExtResource("3_1oxs1")
 texture_mode = 1
-joint_mode = 2
+sharp_limit = 3.0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_1oxs1")
