@@ -1,11 +1,18 @@
-[gd_scene load_steps=14 format=4 uid="uid://kn4aqaxe1gt"]
+[gd_scene load_steps=19 format=4 uid="uid://kn4aqaxe1gt"]
 
 [ext_resource type="Script" uid="uid://0dvcc0h6oka7" path="res://Scripts/Player.gd" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://ectq3jjhatot" path="res://Sprites/light_cone_sharp.png" id="2_kyqiw"]
 [ext_resource type="PackedScene" uid="uid://cse3qi8vjannq" path="res://Scenes/GemUI.tscn" id="3_5ixxa"]
 [ext_resource type="Texture2D" uid="uid://dqmy3c0g3ic13" path="res://Sprites/light.png" id="3_gntrk"]
+[ext_resource type="Shader" uid="uid://ir4tqoye2ln5" path="res://Shaders/HitFlash.tres" id="4_52ee3"]
 [ext_resource type="PackedScene" uid="uid://bxmg667opvgqe" path="res://Scenes/HeartUI.tscn" id="4_dewec"]
 [ext_resource type="PackedScene" uid="uid://bve8uv0ypkp0b" path="res://Scenes/WinUI.tscn" id="6_nn08x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bhhdu"]
+resource_local_to_scene = true
+shader = ExtResource("4_52ee3")
+shader_parameter/Enabled = false
+shader_parameter/Tint = Color(0, 0, 0, 1)
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_qbkls"]
 _data = PackedByteArray("AAADAAUAAAABAAAAMAAAADAAAADAAAAAUklGRrgAAABXRUJQVlA4TKsAAAAvL8ALEBcw//M///MfgAdXsW07zYH0/CPiPRVISG8CaCqQkJ4I6Fcm73JoBiL6r7Bt28bpbtlD0KBmHnO/KXNiicvlRtwxi6jba8cHflzJ8Bwylxnt1DfSggv/BxIkU0fTg05d9zPMrYKS66RmHnO/KXNiicvlRtwxi6jba8cHflzJ8Bwylxnt1DdS133EKzmAu2QK5ixJaH9+kVRl8vKK/AeOByvnVh7qFwAA")
@@ -52,6 +59,44 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="Animation" id="Animation_52ee3"]
+resource_name = "hit_flash"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/Enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.07, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_bhhdu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/Enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_megsn"]
+_data = {
+&"RESET": SubResource("Animation_bhhdu"),
+&"hit_flash": SubResource("Animation_52ee3")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_feb5d"]
 radius = 5.0
 height = 20.0
@@ -64,6 +109,7 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_bhhdu")
 sprite_frames = SubResource("SpriteFrames_5ixxa")
 animation = &"Idle"
 frame_progress = 0.55759174
@@ -88,11 +134,17 @@ metadata/_aseprite_wizard_config_ = {
 }
 metadata/_aseprite_wizard_source_file_hash_ = "91212965057f9698f0bda9536e1da083"
 
+[node name="HitAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimatedSprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_megsn")
+}
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.9254046, 0.9748109)
 shape = SubResource("CapsuleShape2D_feb5d")
 
-[node name="PointLight2D" type="PointLight2D" parent="." groups=["Player"]]
+[node name="PointLight2D" type="PointLight2D" parent="."]
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(0, -5)

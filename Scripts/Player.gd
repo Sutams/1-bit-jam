@@ -3,7 +3,6 @@ extends CharacterBody2D
 # Movement
 const SPEED = 75.0
 const HALT = 2
-var weights = 2.3
 @onready var player_sprite = $AnimatedSprite2D
 
 # Lights
@@ -13,6 +12,7 @@ var rotation_speed = 30
 # HP
 @export var heart_scene: PackedScene
 @onready var hearts_container = $UI/HeartsContainer
+@onready var hit_flash_anim = $HitAnimationPlayer
 var hearts_list : Array[Node]
 var HP = 3
 var took_damage = false
@@ -27,7 +27,7 @@ var score = 0
 
 # I know i should make this separate but dont have the time
 @onready var menu_panel = $UI/Menu
-@onready var start_button = $UI/Panel/Panel/Button
+@onready var start_button = $UI/Menu/Panel/Button
 var restart = false
 
 
@@ -47,15 +47,17 @@ func _ready() -> void:
 		var new_heart = heart_scene.instantiate()
 		hearts_container.add_child(new_heart)
 		hearts_list.append(new_heart)
-		
-	if restart:
-		menu_panel.set_deferred("visible", false)
 
 
 func show_menu(msg : String)-> void:
 	menu_panel.set_deferred("visible", true)
 	$UI/Menu/Panel/Label.text = msg
 	restart = true
+
+
+func reset_scene()-> void:
+	get_tree().call_deferred("reload_current_scene")
+
 
 func add_score(gem: Node):
 	score +=1
@@ -75,11 +77,13 @@ func take_damage():
 			heart_sprite.play("Full")
 		if i == HP:
 			heart_sprite.play("Damage")
-	await get_tree().create_timer(1.5).timeout
+	hit_flash_anim.play("hit_flash")
+	await get_tree().create_timer(1).timeout
+	hit_flash_anim.stop()
 	if HP > 0:
 		took_damage = false
 		return
-	show_menu("Game Over")
+	reset_scene()
 
 
 func _physics_process(delta: float) -> void:
@@ -89,14 +93,6 @@ func _physics_process(delta: float) -> void:
 			if !took_damage:
 				took_damage = !took_damage
 				take_damage()
-	
-	if Input.is_action_just_pressed("drop"):
-		if weights > 1:
-			weights -= 1
-			print("weight: ", weights)
-	if Input.is_action_just_pressed("interact"):
-		if weights < 3:
-			weights += 1
 	
 	var move_x := Input.get_axis("left", "right")
 	if move_x:
@@ -112,7 +108,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += (get_gravity() * delta * weights)/3
+		velocity += (get_gravity() * delta * (score)/2)/3
 	
 	if velocity.length() > 0:
 		player_sprite.play("Walk")
@@ -138,4 +134,4 @@ func _physics_process(delta: float) -> void:
 func _on_button_button_down() -> void:
 	menu_panel.set_deferred("visible", false)
 	if restart:
-		get_tree().call_deferred("reload_current_scene")
+		reset_scene()
