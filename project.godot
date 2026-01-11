@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="1 bit jam"
-run/main_scene="uid://cdp1o5j4wv5e5"
+run/main_scene="uid://d3lpre6jal08n"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://Sprites/icon.svg"
 
@@ -74,4 +74,5 @@ common/physics_interpolation=true
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 scaling_3d/scale=2.0

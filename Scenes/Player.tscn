@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://kn4aqaxe1gt"]
+[gd_scene load_steps=14 format=4 uid="uid://kn4aqaxe1gt"]
 
 [ext_resource type="Script" uid="uid://0dvcc0h6oka7" path="res://Scripts/Player.gd" id="1_rpqav"]
 [ext_resource type="Texture2D" uid="uid://ectq3jjhatot" path="res://Sprites/light_cone_sharp.png" id="2_kyqiw"]
+[ext_resource type="PackedScene" uid="uid://cse3qi8vjannq" path="res://Scenes/GemUI.tscn" id="3_5ixxa"]
 [ext_resource type="Texture2D" uid="uid://dqmy3c0g3ic13" path="res://Sprites/light.png" id="3_gntrk"]
-[ext_resource type="PackedScene" uid="uid://bxmg667opvgqe" path="res://Scenes/Heart.tscn" id="4_dewec"]
+[ext_resource type="PackedScene" uid="uid://bxmg667opvgqe" path="res://Scenes/HeartUI.tscn" id="4_dewec"]
+[ext_resource type="PackedScene" uid="uid://bve8uv0ypkp0b" path="res://Scenes/WinUI.tscn" id="6_nn08x"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_qbkls"]
 _data = PackedByteArray("AAADAAUAAAABAAAAMAAAADAAAADAAAAAUklGRrgAAABXRUJQVlA4TKsAAAAvL8ALEBcw//M///MfgAdXsW07zYH0/CPiPRVISG8CaCqQkJ4I6Fcm73JoBiL6r7Bt28bpbtlD0KBmHnO/KXNiicvlRtwxi6jba8cHflzJ8Bwylxnt1DfSggv/BxIkU0fTg05d9zPMrYKS66RmHnO/KXNiicvlRtwxi6jba8cHflzJ8Bwylxnt1DdS133EKzmAu2QK5ixJaH9+kVRl8vKK/AeOByvnVh7qFwAA")
@@ -54,9 +56,10 @@ animations = [{
 radius = 5.0
 height = 20.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_rpqav")
 heart_scene = ExtResource("4_dewec")
+gem_scene = ExtResource("3_5ixxa")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -89,11 +92,11 @@ metadata/_aseprite_wizard_source_file_hash_ = "91212965057f9698f0bda9536e1da083"
 scale = Vector2(0.9254046, 0.9748109)
 shape = SubResource("CapsuleShape2D_feb5d")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." groups=["Player"]]
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(0, -5)
-scale = Vector2(0.71, 0.71)
+scale = Vector2(0.8, 0.8)
 color = Color(0.6872149, 0.68721503, 0.6872149, 1)
 shadow_enabled = true
 texture = ExtResource("2_kyqiw")
@@ -104,9 +107,19 @@ scale = Vector2(0.15, 0.15)
 color = Color(0.38549262, 0.38549244, 0.38549247, 1)
 texture = ExtResource("3_gntrk")
 
-[node name="HealthUI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HeartsContainer" type="HBoxContainer" parent="HealthUI"]
+[node name="HeartsContainer" type="HBoxContainer" parent="UI"]
 offset_top = -34.0
 offset_right = 41.0
 offset_bottom = 6.0
+
+[node name="GemsContainer" type="VBoxContainer" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Menu" parent="UI" instance=ExtResource("6_nn08x")]
+
+[connection signal="button_down" from="UI/Menu/Panel/Button" to="." method="_on_button_button_down"]
+
+[editable path="UI/Menu"]

@@ -176,11 +176,17 @@ script = ExtResource("1_j5yw3")
 [node name="Player" parent="." instance=ExtResource("2_3cx6b")]
 position = Vector2(138, 126)
 
-[node name="HeartsContainer" parent="Player/HealthUI" index="0"]
-offset_left = 23.0
-offset_top = 25.0
-offset_right = 64.0
-offset_bottom = 65.0
+[node name="HeartsContainer" parent="Player/UI" index="0"]
+offset_left = 24.0
+offset_top = 19.0
+offset_right = 65.0
+offset_bottom = 59.0
+
+[node name="GemsContainer" parent="Player/UI" index="1"]
+offset_left = 17.0
+offset_top = 53.0
+offset_right = 57.0
+offset_bottom = 93.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
@@ -473,6 +479,25 @@ shape = SubResource("CapsuleShape2D_4q8tf")
 wait_time = 5.0
 autostart = true
 
+[node name="GemArea" parent="." instance=ExtResource("8_bf53h")]
+position = Vector2(662, 90)
+
+[node name="GemArea2" parent="." instance=ExtResource("8_bf53h")]
+position = Vector2(78, 545)
+
+[node name="PointLight2D" parent="GemArea2" index="1"]
+rotation = 3.0979595
+scale = Vector2(0.68549746, 0.24894068)
+
+[node name="GemArea3" parent="." instance=ExtResource("8_bf53h")]
+position = Vector2(807, 549)
+
+[node name="PointLight2D" parent="GemArea3" index="1"]
+scale = Vector2(0.282, 0.265)
+
+[node name="GemArea4" parent="." instance=ExtResource("8_bf53h")]
+position = Vector2(795, 909)
+
 [node name="Chest" type="StaticBody2D" parent="."]
 position = Vector2(167, 844)
 metadata/_edit_lock_ = true
@@ -539,25 +564,6 @@ shape = SubResource("CapsuleShape2D_4q8tf")
 wait_time = 5.0
 autostart = true
 
-[node name="GemArea" parent="." instance=ExtResource("8_bf53h")]
-position = Vector2(662, 90)
-
-[node name="GemArea2" parent="." instance=ExtResource("8_bf53h")]
-position = Vector2(78, 545)
-
-[node name="PointLight2D" parent="GemArea2" index="1"]
-rotation = 3.0979595
-scale = Vector2(0.68549746, 0.24894068)
-
-[node name="GemArea3" parent="." instance=ExtResource("8_bf53h")]
-position = Vector2(807, 549)
-
-[node name="PointLight2D" parent="GemArea3" index="1"]
-scale = Vector2(0.282, 0.265)
-
-[node name="GemArea4" parent="." instance=ExtResource("8_bf53h")]
-position = Vector2(795, 909)
-
 [connection signal="body_entered" from="Fish/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Fish/Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]
@@ -565,6 +571,7 @@ position = Vector2(795, 909)
 [connection signal="timeout" from="Chest/ChestTimer" to="." method="_on_chest_timer_timeout"]
 
 [editable path="Player"]
+[editable path="Player/UI/Menu"]
 [editable path="Fish"]
 [editable path="NavigationRegion2D/Map/MapLayout2"]
 [editable path="NavigationRegion2D/Map/MapLayout3"]
@@ -578,8 +585,8 @@ position = Vector2(795, 909)
 [editable path="NavigationRegion2D/Map/MapLayout11"]
 [editable path="NavigationRegion2D/Map/MapLayout"]
 [editable path="Clam/GemArea"]
-[editable path="Chest/GemArea"]
 [editable path="GemArea"]
 [editable path="GemArea2"]
 [editable path="GemArea3"]
 [editable path="GemArea4"]
+[editable path="Chest/GemArea"]

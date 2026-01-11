@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://bve8uv0ypkp0b"]
+
+[ext_resource type="FontFile" uid="uid://e7k404cptofu" path="res://Font/PixelatedEleganceRegular-ovyAA.ttf" id="1_dimls"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dimls"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tk243"]
+bg_color = Color(0.25565878, 0.2556588, 0.2556587, 1)
+
+[node name="WinPanel" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -67.5
+offset_right = 120.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dimls")
+
+[node name="Label" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -56.0
+offset_right = 116.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_dimls")
+bbcode_enabled = true
+text = "[wave amp=50] D E L V E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = 7.0
+offset_right = 39.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_dimls")
+theme_override_styles/normal = SubResource("StyleBoxFlat_tk243")
+text = "Start"

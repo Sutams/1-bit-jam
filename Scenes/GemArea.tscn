@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_x3xnh"]
 radius = 5.0
 
-[node name="GemArea" type="Area2D"]
+[node name="GemArea" type="Area2D" groups=["Gem"]]
 script = ExtResource("1_5qkbr")
 metadata/_edit_group_ = true
 

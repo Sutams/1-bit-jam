@@ -4,23 +4,42 @@ extends CharacterBody2D
 const SPEED = 75.0
 const HALT = 2
 var weights = 2.3
+@onready var player_sprite = $AnimatedSprite2D
 
 # Lights
 var rotation_speed = 30
+@onready var flashlight = $PointLight2D
 
 # HP
 @export var heart_scene: PackedScene
-@onready var hearts_container = $HealthUI/HeartsContainer
+@onready var hearts_container = $UI/HeartsContainer
 var hearts_list : Array[Node]
 var HP = 3
 var took_damage = false
 
 # Scoring system, but now that i think about it its weird that 
 # its here in the player script instead of the game one
+@export var gem_scene: PackedScene
+@onready var gems_container = $UI/GemsContainer
+var gems_list : Array[Node] # GemArea scattered on the map
+var gemsUI_list : Array[Node] # Gem UI element
 var score = 0
+
+# I know i should make this separate but dont have the time
+@onready var menu_panel = $UI/Menu
+@onready var start_button = $UI/Panel/Panel/Button
+var restart = false
 
 
 func _ready() -> void:
+	gems_list = get_tree().get_nodes_in_group("Gem")
+	if !gem_scene:
+		return
+	
+	for i in range(gems_list.size()):
+		var new_gem = gem_scene.instantiate()
+		gems_container.add_child(new_gem)
+		gemsUI_list.append(new_gem)
 	if !heart_scene:
 		return
 	# Add hearts
@@ -28,12 +47,25 @@ func _ready() -> void:
 		var new_heart = heart_scene.instantiate()
 		hearts_container.add_child(new_heart)
 		hearts_list.append(new_heart)
+		
+	if restart:
+		menu_panel.set_deferred("visible", false)
 
-func add_score():
+
+func show_menu(msg : String)-> void:
+	menu_panel.set_deferred("visible", true)
+	$UI/Menu/Panel/Label.text = msg
+	restart = true
+
+func add_score(gem: Node):
 	score +=1
-	print(score)
-	if score >= 6:
-		print("Win")
+	for i in range(gems_list.size()):
+		if gem == gems_list[i]:
+			var gem_sprite = gemsUI_list[i].get_node("GemSprite")
+			gem_sprite.set_deferred("modulate", Color.WHITE)
+	if score >= gems_list.size():
+		show_menu("Thanks for playing Delve!")
+
 
 func take_damage():
 	HP -=1
@@ -47,8 +79,7 @@ func take_damage():
 	if HP > 0:
 		took_damage = false
 		return
-	print("Game over")
-	get_tree().call_deferred("reload_current_scene")
+	show_menu("Game Over")
 
 
 func _physics_process(delta: float) -> void:
@@ -62,7 +93,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("drop"):
 		if weights > 1:
 			weights -= 1
-			print(weights)
+			print("weight: ", weights)
 	if Input.is_action_just_pressed("interact"):
 		if weights < 3:
 			weights += 1
@@ -73,7 +104,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, HALT)
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var move_y := Input.get_axis("up", "down")
 	if move_y:
 		velocity.y = move_y * SPEED
@@ -85,21 +115,27 @@ func _physics_process(delta: float) -> void:
 		velocity += (get_gravity() * delta * weights)/3
 	
 	if velocity.length() > 0:
-		$AnimatedSprite2D.play("Walk")
+		player_sprite.play("Walk")
 	else:
-		$AnimatedSprite2D.play("Idle")
+		player_sprite.play("Idle")
 	
 	var target_angle = velocity.angle()+PI
 	if velocity.x > 0:
-		$AnimatedSprite2D.flip_h = false
+		player_sprite.flip_h = false
 	if velocity.x < 0:
-		$AnimatedSprite2D.flip_h = true
+		player_sprite.flip_h = true
 	if velocity == Vector2.ZERO:
-		if $AnimatedSprite2D.flip_h:
+		if player_sprite.flip_h:
 			target_angle = 0
 		else:
 			target_angle = PI
 	
-	$PointLight2D.rotation = lerp_angle($PointLight2D.rotation, target_angle, delta * rotation_speed)
+	flashlight.rotation = lerp_angle(flashlight.rotation, target_angle, delta * rotation_speed)
 	
 	move_and_slide()
+
+
+func _on_button_button_down() -> void:
+	menu_panel.set_deferred("visible", false)
+	if restart:
+		get_tree().call_deferred("reload_current_scene")
