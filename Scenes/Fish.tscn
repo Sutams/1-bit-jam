@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://1063cnro2t4i"]
 
-[ext_resource type="Texture2D" uid="uid://dhadaijhmoaeg" path="res://Sprites/icon.svg" id="1_15fnf"]
 [ext_resource type="Script" uid="uid://brmkuan418h4u" path="res://Scripts/Fish.gd" id="1_two43"]
+[ext_resource type="Texture2D" uid="uid://h6qyyhgedr01" path="res://Sprites/Fish.png" id="2_two43"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_two43"]
 radius = 12.288139
@@ -9,6 +9,8 @@ radius = 12.288139
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_two43"]
 
 [node name="Fish" type="CharacterBody2D" groups=["Fish"]]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_two43")
 metadata/_edit_group_ = true
 
@@ -26,8 +28,7 @@ shape = SubResource("CapsuleShape2D_two43")
 debug_color = Color(0.9946379, 0, 0.22626597, 0.41960785)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.045000017, 0.02250001)
-texture = ExtResource("1_15fnf")
+texture = ExtResource("2_two43")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 3.0
@@ -35,7 +36,6 @@ target_desired_distance = 3.0
 navigation_layers = 65
 path_postprocessing = 1
 avoidance_enabled = true
-debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

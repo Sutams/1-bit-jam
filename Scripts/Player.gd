@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 # Movement
-const SPEED = 75.0
+const MAXSPEED = 75.0
+var acc = 1.0
 const HALT = 2
 @onready var player_sprite = $AnimatedSprite2D
 
@@ -95,20 +96,29 @@ func _physics_process(delta: float) -> void:
 				take_damage()
 	
 	var move_x := Input.get_axis("left", "right")
+	var move_y := Input.get_axis("up", "down")
+	
+	if move_x or move_y:
+		if acc < MAXSPEED:
+			acc += 1
+		velocity.x = move_x * acc
+	else:
+		if acc > 1:
+			acc -= 1
+	
 	if move_x:
-		velocity.x = move_x * SPEED
+		velocity.x = move_x * acc
 	else:
 		velocity.x = move_toward(velocity.x, 0, HALT)
-	# Get the input direction and handle the movement/deceleration.
-	var move_y := Input.get_axis("up", "down")
+	
 	if move_y:
-		velocity.y = move_y * SPEED
+		velocity.y = move_y * acc
 	else:
 		velocity.y = move_toward(velocity.y, 0, HALT)
 	
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += (get_gravity() * delta * (score)/2)/3
+		velocity += (get_gravity() * delta * score/2)/3
 	
 	if velocity.length() > 0:
 		player_sprite.play("Walk")
