@@ -188,6 +188,9 @@ position = Vector2(138, 126)
 [node name="AnimatedSprite2D" parent="Player" index="0"]
 material = SubResource("ShaderMaterial_acvyw")
 
+[node name="PointLight2D2" parent="Player" index="4"]
+texture_filter = 1
+
 [node name="HeartsContainer" parent="Player/UI" index="0"]
 offset_left = 24.0
 offset_top = 19.0
@@ -209,6 +212,7 @@ limit_left = -8
 limit_top = 24
 limit_right = 863
 limit_bottom = 976
+editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 process_priority = 300
@@ -227,6 +231,7 @@ follow_damping = true
 follow_damping_value = Vector2(0.15, 0.15)
 dead_zone_width = 0.09
 dead_zone_height = 0.2
+draw_limits = true
 limit_target = NodePath("../NavigationRegion2D/CameraBounds/CollisionShape2D")
 
 [node name="FishSpawner" type="Node2D" parent="."]
